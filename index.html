@@ -525,7 +525,7 @@
   <section id="projects">
     <div class="section-head">
       <h2>Projects &amp; Case Studies</h2>
-      <span class="count" id="project-count">6 total</span>
+      <span class="count" id="project-count">7 total</span>
     </div>
     <p class="lede" style="margin-bottom: 26px;">
       Viewing as <strong id="lens-label">Data Analyst</strong> — the lens above changes which
@@ -533,6 +533,34 @@
     </p>
 
     <div class="project-grid">
+      <div class="project featured" id="proj-voice">
+        <div class="project-head">
+          <h3>Longitudinal Forensic Voice Comparison System</h3>
+          <span class="status-live"><span class="dot"></span>live</span>
+        </div>
+        <p class="desc">
+          MSc dissertation — a speaker verification system using SpeechBrain's ECAPA-TDNN
+          model to convert audio into speaker embeddings, compared with cosine similarity
+          to decide whether two clips are the same speaker. Backend built with Flask and a
+          SQL-backed metadata store.
+        </p>
+        <div class="metric-row">
+          <div class="metric"><span class="num mono">98.2%</span><span class="label">verification accuracy</span></div>
+          <div class="metric"><span class="num mono">276</span><span class="label">pairwise comparisons</span></div>
+          <div class="metric"><span class="num mono">192-d</span><span class="label">speaker embeddings</span></div>
+        </div>
+        <div class="project-links">
+          <a class="primary" href="https://voice-comparison-gafkqkg4wzbdsahpvj6x3v.streamlit.app/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
+            Live dashboard
+          </a>
+          <a href="https://github.com/Dinesh-0707/voice-comparison" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+            View code
+          </a>
+        </div>
+      </div>
+
       <div class="project featured" id="proj-house-price">
         <div class="project-head">
           <h3>UK Regional House Price Monitor</h3>
@@ -809,12 +837,13 @@
       coreStack: 'SQL · <em>Power BI</em> · Python',
       label: 'Data Analyst',
       projects: {
-        'proj-house-price': { order: 0, featured: true },
-        'proj-crime': { order: 1, featured: true },
-        'proj-stock-pipeline': { order: 2, featured: true },
-        'proj-ba': { order: 3, featured: false },
-        'proj-quantium': { order: 4, featured: false },
-        'proj-pm': { order: 5, featured: false }
+        'proj-voice': { order: 0, featured: true },
+        'proj-house-price': { order: 1, featured: true },
+        'proj-crime': { order: 2, featured: true },
+        'proj-stock-pipeline': { order: 3, featured: false },
+        'proj-ba': { order: 4, featured: false },
+        'proj-quantium': { order: 5, featured: false },
+        'proj-pm': { order: 6, featured: false }
       },
       skills: { 'skill-analytics': 0, 'skill-ai': 1, 'skill-strategy': 2, 'skill-delivery': 3, 'skill-engineering': 4 }
     },
@@ -825,11 +854,12 @@
       label: 'Data Engineer',
       projects: {
         'proj-stock-pipeline': { order: 0, featured: true },
-        'proj-house-price': { order: 1, featured: true },
-        'proj-crime': { order: 2, featured: true },
-        'proj-pm': { order: 3, featured: false },
-        'proj-ba': { order: 4, featured: false },
-        'proj-quantium': { order: 5, featured: false }
+        'proj-voice': { order: 1, featured: true },
+        'proj-house-price': { order: 2, featured: true },
+        'proj-crime': { order: 3, featured: false },
+        'proj-pm': { order: 4, featured: false },
+        'proj-ba': { order: 5, featured: false },
+        'proj-quantium': { order: 6, featured: false }
       },
       skills: { 'skill-engineering': 0, 'skill-analytics': 1, 'skill-ai': 2, 'skill-delivery': 3, 'skill-strategy': 4 }
     },
@@ -843,8 +873,9 @@
         'proj-stock-pipeline': { order: 1, featured: true },
         'proj-house-price': { order: 2, featured: false },
         'proj-crime': { order: 3, featured: false },
-        'proj-ba': { order: 4, featured: false },
-        'proj-quantium': { order: 5, featured: false }
+        'proj-voice': { order: 4, featured: false },
+        'proj-ba': { order: 5, featured: false },
+        'proj-quantium': { order: 6, featured: false }
       },
       skills: { 'skill-strategy': 0, 'skill-delivery': 1, 'skill-analytics': 2, 'skill-ai': 3, 'skill-engineering': 4 }
     },
@@ -858,8 +889,9 @@
         'proj-crime': { order: 1, featured: true },
         'proj-house-price': { order: 2, featured: false },
         'proj-stock-pipeline': { order: 3, featured: false },
-        'proj-ba': { order: 4, featured: false },
-        'proj-quantium': { order: 5, featured: false }
+        'proj-voice': { order: 4, featured: false },
+        'proj-ba': { order: 5, featured: false },
+        'proj-quantium': { order: 6, featured: false }
       },
       skills: { 'skill-delivery': 0, 'skill-analytics': 1, 'skill-ai': 2, 'skill-strategy': 3, 'skill-engineering': 4 }
     }
