@@ -1,0 +1,688 @@
+<title>Dinesh Navaneethan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Work+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #F4F5F8;
+    --surface: #FFFFFF;
+    --surface-2: #ECEEF3;
+    --ink: #12141B;
+    --muted: #5B606E;
+    --rule: #DFE2E9;
+    --rule-strong: #C7CBD6;
+    --accent: #1B6B50;
+    --accent-ink: #FFFFFF;
+    --accent-soft: #E1EEE7;
+    --stage: #0E1013;
+    --stage-surface: #191D22;
+    --stage-ink: #EEF0F2;
+    --stage-muted: #97A0AA;
+    --stage-rule: #262B32;
+    --shadow-sm: 0 1px 2px rgba(18, 20, 27, 0.05);
+    --shadow-md: 0 2px 4px rgba(18, 20, 27, 0.05), 0 12px 28px rgba(18, 20, 27, 0.09);
+    --shadow-lg: 0 6px 12px rgba(18, 20, 27, 0.08), 0 24px 56px rgba(18, 20, 27, 0.16);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0E1013;
+      --surface: #191D22;
+      --surface-2: #20252B;
+      --ink: #EEF0F2;
+      --muted: #97A0AA;
+      --rule: #262B32;
+      --rule-strong: #333A43;
+      --accent: #3FA382;
+      --accent-ink: #06140F;
+      --accent-soft: #17332A;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+      --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.3), 0 14px 32px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.35), 0 28px 60px rgba(0, 0, 0, 0.5);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0E1013;
+    --surface: #191D22;
+    --surface-2: #20252B;
+    --ink: #EEF0F2;
+    --muted: #97A0AA;
+    --rule: #262B32;
+    --rule-strong: #333A43;
+    --accent: #3FA382;
+    --accent-ink: #06140F;
+    --accent-soft: #17332A;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.3), 0 14px 32px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.35), 0 28px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+    line-height: 1.6;
+  }
+
+  ::selection { background: var(--accent-soft); color: var(--ink); }
+  a { color: var(--accent); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .serif { font-family: "Newsreader", ui-serif, Georgia, serif; }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace; font-variant-numeric: tabular-nums; }
+
+  h1, h2, h3 { text-wrap: balance; margin: 0; }
+
+  /* ============ Nav ============ */
+  .topbar {
+    position: sticky; top: 0; z-index: 40;
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .topbar-inner {
+    max-width: 1040px; margin: 0 auto; padding: 15px 28px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
+  .brand-mark {
+    width: 30px; height: 30px; position: relative; flex-shrink: 0;
+    transform-style: preserve-3d; perspective: 200px;
+  }
+  .brand-mark .sq {
+    position: absolute; inset: 0; border-radius: 6px;
+    background: var(--accent);
+  }
+  .brand-mark .sq:first-child { opacity: 0.35; transform: translate(3px, 3px) rotateZ(8deg); }
+  .brand-mark .sq:last-child { transform: rotateZ(-6deg); }
+  .brand span.name { font-family: "Newsreader", serif; font-weight: 600; font-size: 16.5px; }
+  nav.links { display: flex; gap: 28px; font-size: 13.5px; font-weight: 600; }
+  nav.links a { color: var(--muted); text-decoration: none; }
+  nav.links a:hover { color: var(--accent); }
+  .cta-row { display: flex; gap: 10px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 9px 16px; font-size: 13.5px; font-weight: 700;
+    text-decoration: none; border-radius: 8px; white-space: nowrap;
+  }
+  .btn-primary { background: var(--accent); color: var(--accent-ink); box-shadow: var(--shadow-sm); }
+  .btn-primary:hover { filter: brightness(1.07); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--rule-strong); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  @media (max-width: 760px) { nav.links { display: none; } }
+
+  /* ============ Hero stage (dark, 3D) ============ */
+  .stage {
+    position: relative;
+    background: var(--stage);
+    color: var(--stage-ink);
+    overflow: hidden;
+    padding: 84px 28px 120px;
+  }
+  .stage-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--accent) 16%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--accent) 16%, transparent) 1px, transparent 1px);
+    background-size: 56px 56px;
+    transform: perspective(600px) rotateX(58deg) scale(1.6);
+    transform-origin: top center;
+    opacity: 0.35;
+    mask-image: linear-gradient(to bottom, black, transparent 75%);
+    -webkit-mask-image: linear-gradient(to bottom, black, transparent 75%);
+  }
+  .stage-glow {
+    position: absolute; top: -220px; left: 50%; translate: -50% 0;
+    width: 640px; height: 480px; border-radius: 50%;
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 30%, transparent), transparent);
+    filter: blur(10px);
+  }
+  .stage-inner { position: relative; max-width: 1040px; margin: 0 auto; }
+
+  .eyebrow {
+    font-family: "IBM Plex Mono", monospace; font-size: 12px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--stage-muted);
+    margin-bottom: 18px; display: flex; align-items: center; gap: 10px;
+  }
+  .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--accent); }
+
+  h1.name {
+    font-family: "Newsreader", serif;
+    font-size: clamp(40px, 6.4vw, 66px);
+    font-weight: 600; letter-spacing: -0.02em; line-height: 1.04;
+    max-width: 14ch;
+  }
+  .role-line { font-size: 19px; color: var(--stage-muted); font-weight: 400; max-width: 52ch; margin-top: 18px; }
+  .role-line strong { color: var(--stage-ink); font-weight: 600; }
+
+  .hero-cta { display: flex; gap: 12px; margin-top: 34px; flex-wrap: wrap; }
+  .btn-lg { padding: 13px 22px; font-size: 14.5px; border-radius: 9px; }
+  .btn-ghost-dark { background: transparent; color: var(--stage-ink); border: 1px solid var(--stage-rule); }
+  .btn-ghost-dark:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Floating 3D panels */
+  .float-stack { perspective: 1200px; height: 0; }
+  .float-card {
+    position: absolute;
+    background: color-mix(in srgb, var(--stage-surface) 78%, transparent);
+    border: 1px solid color-mix(in srgb, var(--stage-ink) 12%, transparent);
+    border-radius: 14px;
+    padding: 16px 18px;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06);
+    transform-style: preserve-3d;
+    will-change: transform;
+    animation: bob 7s ease-in-out infinite;
+  }
+  .float-card .k { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--stage-muted); }
+  .float-card .v { font-family: "Newsreader", serif; font-size: 19px; font-weight: 600; margin-top: 4px; color: var(--stage-ink); }
+  .float-card .v em { color: var(--accent); font-style: normal; }
+
+  .fc-1 { top: -18px; right: 6%; width: 208px; transform: rotateY(-10deg) rotateX(6deg) rotateZ(2deg); animation-delay: 0s; }
+  .fc-2 { top: 118px; right: 22%; width: 178px; transform: rotateY(-6deg) rotateX(4deg) rotateZ(-3deg); animation-delay: 1.4s; }
+  .fc-3 { top: 42px; right: -2%; width: 168px; transform: rotateY(-14deg) rotateX(8deg) rotateZ(4deg); animation-delay: 2.7s; }
+
+  @keyframes bob {
+    0%, 100% { margin-top: 0; }
+    50% { margin-top: -10px; }
+  }
+  @media (max-width: 900px) { .float-card { display: none; } }
+
+  .badges { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 30px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 8px 14px; font-size: 12.5px; font-weight: 600;
+    background: color-mix(in srgb, var(--stage-surface) 70%, transparent);
+    color: var(--stage-ink); border: 1px solid var(--stage-rule); border-radius: 999px;
+  }
+  .badge.visa { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
+  .badge svg { width: 13px; height: 13px; }
+
+  .contact-row { display: flex; flex-wrap: wrap; gap: 6px 24px; font-size: 14px; color: var(--stage-muted); margin-top: 26px; }
+  .contact-row a { color: var(--stage-muted); text-decoration: none; display: inline-flex; align-items: center; gap: 7px; }
+  .contact-row a svg { width: 14px; height: 14px; opacity: 0.75; }
+  .contact-row a:hover { color: var(--accent); }
+
+  /* ============ Body ============ */
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 28px 100px; }
+  section { padding: 56px 0; border-bottom: 1px solid var(--rule); scroll-margin-top: 76px; }
+  section:last-of-type { border-bottom: none; }
+
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 26px; }
+  .section-head h2 { font-family: "Newsreader", serif; font-size: 27px; font-weight: 600; }
+  .section-head .count { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; color: var(--muted); }
+
+  p.lede { max-width: 66ch; color: var(--muted); font-size: 16.5px; }
+
+  /* ============ Skills ============ */
+  .skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+  .skill-card {
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 14px;
+    padding: 20px 22px; box-shadow: var(--shadow-sm);
+  }
+  .skill-card h3 {
+    font-family: "IBM Plex Mono", monospace; font-size: 11.5px; text-transform: uppercase;
+    letter-spacing: 0.07em; color: var(--accent); font-weight: 600; margin-bottom: 13px;
+  }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 7px; }
+  .pill { font-size: 13px; padding: 5px 11px; border-radius: 7px; background: var(--surface-2); color: var(--ink); }
+
+  /* ============ Projects — 3D tilt cards ============ */
+  .project-grid { perspective: 1400px; }
+  .project {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    padding: 26px 28px;
+    margin-bottom: 18px;
+    box-shadow: var(--shadow-md);
+    transform-style: preserve-3d;
+    will-change: transform;
+    transition: transform 0.12s ease-out, box-shadow 0.2s ease;
+    overflow: hidden;
+  }
+  .project::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(400px circle at var(--mx, 50%) var(--my, 0%), color-mix(in srgb, var(--accent) 10%, transparent), transparent 60%);
+    opacity: 0; transition: opacity 0.2s ease;
+    pointer-events: none;
+  }
+  .project:hover { box-shadow: var(--shadow-lg); }
+  .project:hover::before { opacity: 1; }
+  .project.featured { border-color: color-mix(in srgb, var(--accent) 45%, var(--rule)); }
+
+  .project-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
+  .project-head h3 { font-family: "Newsreader", serif; font-size: 21px; font-weight: 600; }
+  .project-tag {
+    font-family: "IBM Plex Mono", monospace; font-size: 11.5px; color: var(--muted);
+    padding: 4px 9px; border: 1px solid var(--rule); border-radius: 6px; white-space: nowrap;
+  }
+
+  .project p.desc { color: var(--muted); margin: 10px 0 18px; max-width: 68ch; font-size: 15px; }
+
+  .metric-row {
+    display: flex; flex-wrap: wrap; gap: 30px;
+    margin: 16px 0 20px; padding: 15px 0;
+    border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  }
+  .metric { display: flex; flex-direction: column; gap: 3px; }
+  .metric .num { font-family: "IBM Plex Mono", monospace; font-size: 21px; font-weight: 600; color: var(--accent); }
+  .metric .label { font-size: 12px; color: var(--muted); }
+
+  .project-links { display: flex; gap: 12px; flex-wrap: wrap; }
+  .project-links a {
+    text-decoration: none; font-weight: 700; font-size: 13.5px;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 9px 15px; border-radius: 8px; border: 1px solid var(--rule-strong); color: var(--ink);
+  }
+  .project-links a:hover { border-color: var(--accent); color: var(--accent); }
+  .project-links a.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .project-links a.primary:hover { filter: brightness(1.07); color: var(--accent-ink); }
+  .project-links a svg { width: 13px; height: 13px; }
+
+  .status-live { font-size: 11.5px; font-family: "IBM Plex Mono", monospace; color: var(--accent); display: inline-flex; align-items: center; gap: 6px; font-weight: 600; }
+  .status-live .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); animation: pulse 2.2s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  /* ============ Education / certs ============ */
+  .list-row {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+    padding: 16px 0; border-bottom: 1px solid var(--rule);
+  }
+  .list-row:last-child { border-bottom: none; }
+  .list-row .school { font-weight: 700; font-size: 15.5px; }
+  .list-row .degree { color: var(--muted); font-size: 14px; margin-top: 3px; }
+  .list-row .when {
+    font-family: "IBM Plex Mono", monospace; font-size: 12.5px; color: var(--muted);
+    white-space: nowrap; padding: 5px 10px; background: var(--surface-2); border-radius: 7px;
+  }
+  .list-row .tag {
+    font-family: "IBM Plex Mono", monospace; font-size: 11px; padding: 4px 9px;
+    border-radius: 7px; background: var(--accent-soft); color: var(--accent); white-space: nowrap; font-weight: 700;
+  }
+  .list-row .tag.pending { background: var(--surface-2); color: var(--muted); }
+
+  /* ============ Footer ============ */
+  footer {
+    padding-top: 30px; display: flex; flex-wrap: wrap; justify-content: space-between;
+    align-items: center; gap: 14px; color: var(--muted); font-size: 13px;
+  }
+  footer .social { display: flex; gap: 12px; }
+  footer .social a {
+    color: var(--muted); display: inline-flex; align-items: center; justify-content: center;
+    width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--rule-strong);
+  }
+  footer .social a:hover { color: var(--accent); border-color: var(--accent); }
+  footer .social svg { width: 15px; height: 15px; }
+
+  @media (max-width: 560px) {
+    .wrap { padding: 0 18px 80px; }
+    .stage { padding: 64px 18px 90px; }
+    .metric-row { gap: 18px; }
+    .project { padding: 22px 20px; }
+    .list-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+  }
+</style>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark"><span class="sq"></span><span class="sq"></span></span>
+      <span class="name">Dinesh Navaneethan</span>
+    </a>
+    <nav class="links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#certs">Certifications</a>
+    </nav>
+    <div class="cta-row">
+      <a class="btn btn-ghost" href="https://linkedin.com/in/dineshnavaneethan" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-primary" href="mailto:dinesh070704@gmail.com">Email me</a>
+    </div>
+  </div>
+</div>
+
+<div id="top" class="stage">
+  <div class="stage-grid" aria-hidden="true"></div>
+  <div class="stage-glow" aria-hidden="true"></div>
+  <div class="stage-inner">
+    <div class="eyebrow">Data &amp; Business Analytics Portfolio</div>
+    <h1 class="name">Dinesh Navaneethan</h1>
+    <div class="role-line">
+      <strong>Data Analyst</strong> — Power BI, SQL &amp; Python — MSc AI with Business
+      Strategy, Aston University. I turn data into decisions people act on.
+    </div>
+
+    <div class="badges">
+      <span class="badge visa">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+        UK Graduate Route Visa — 2 yrs, no sponsorship needed
+      </span>
+      <span class="badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Birmingham, UK · open to relocation
+      </span>
+      <span class="badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Available immediately
+      </span>
+    </div>
+
+    <div class="contact-row">
+      <a href="mailto:dinesh070704@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
+        dinesh070704@gmail.com
+      </a>
+      <a href="https://linkedin.com/in/dineshnavaneethan" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        linkedin.com/in/dineshnavaneethan
+      </a>
+      <a href="https://github.com/Dinesh-0707" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+        github.com/Dinesh-0707
+      </a>
+    </div>
+
+    <div class="float-stack">
+      <div class="float-card fc-1">
+        <div class="k">Live Projects</div>
+        <div class="v"><em>3</em> deployed apps</div>
+      </div>
+      <div class="float-card fc-2">
+        <div class="k">Work Authorization</div>
+        <div class="v">2 <em>yrs</em>, no sponsorship</div>
+      </div>
+      <div class="float-card fc-3">
+        <div class="k">Core Stack</div>
+        <div class="v">SQL · <em>Power BI</em> · Python</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section id="about">
+    <div class="section-head"><h2>About</h2></div>
+    <p class="lede">
+      I turn messy datasets into decisions stakeholders act on — building Power BI and
+      Tableau dashboards, writing SQL to clean and model relational data, and applying
+      strategic frameworks (SWOT, PESTLE, Porter's Five Forces) so the analysis lands as
+      a recommendation, not just a chart. First-class BCA in Data Science, MSc in AI with
+      Business Strategy. Full UK work rights for 2 years, no sponsorship required.
+    </p>
+  </section>
+
+  <section id="skills">
+    <div class="section-head"><h2>Skills</h2></div>
+    <div class="skill-grid">
+      <div class="skill-card">
+        <h3>Data &amp; Analytics</h3>
+        <div class="pill-row">
+          <span class="pill">SQL</span><span class="pill">Power BI / DAX</span>
+          <span class="pill">Tableau</span><span class="pill">Python / pandas</span>
+          <span class="pill">R</span><span class="pill">Excel</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Business &amp; Strategy</h3>
+        <div class="pill-row">
+          <span class="pill">Requirements gathering</span><span class="pill">BPMN</span>
+          <span class="pill">SWOT / PESTLE</span><span class="pill">Porter's Five Forces</span>
+          <span class="pill">Stakeholder mgmt</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Delivery</h3>
+        <div class="pill-row">
+          <span class="pill">Agile / Scrum</span><span class="pill">Sprint planning</span>
+          <span class="pill">Data storytelling</span><span class="pill">Client comms</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-head">
+      <h2>Projects</h2>
+      <span class="count">5 shipped</span>
+    </div>
+
+    <div class="project-grid">
+      <div class="project featured" data-tilt>
+        <div class="project-head">
+          <h3>UK Regional House Price Monitor</h3>
+          <span class="status-live"><span class="dot"></span>live</span>
+        </div>
+        <p class="desc">
+          End-to-end Python pipeline pulling live data from HM Land Registry's public
+          UK House Price Index API, cleaned into a SQLite warehouse, served through an
+          interactive Streamlit dashboard tracking regional price trends and affordability
+          by property type.
+        </p>
+        <div class="metric-row">
+          <div class="metric"><span class="num mono">8</span><span class="label">UK regions tracked</span></div>
+          <div class="metric"><span class="num mono">3yr</span><span class="label">monthly history</span></div>
+          <div class="metric"><span class="num mono">live</span><span class="label">API-sourced, not static CSV</span></div>
+        </div>
+        <div class="project-links">
+          <a class="primary" href="https://uk-house-price-dashboard-3kxstxtkpbp5hqpsdbglyf.streamlit.app/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
+            Live dashboard
+          </a>
+          <a href="https://github.com/Dinesh-0707/uk-house-price-dashboard" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+            View code
+          </a>
+        </div>
+      </div>
+
+      <div class="project featured" data-tilt>
+        <div class="project-head">
+          <h3>UK City Crime Trends &amp; Forecast</h3>
+          <span class="status-live"><span class="dot"></span>live</span>
+        </div>
+        <p class="desc">
+          Multi-page Python app tracking reported crime volume across 5 UK cities from
+          the live UK Police API, with a category breakdown, year-on-year city comparison,
+          and a 3-month forecast per city using Holt's linear trend exponential smoothing.
+        </p>
+        <div class="metric-row">
+          <div class="metric"><span class="num mono">5</span><span class="label">UK cities tracked</span></div>
+          <div class="metric"><span class="num mono">4</span><span class="label">app pages</span></div>
+          <div class="metric"><span class="num mono">3mo</span><span class="label">statistical forecast</span></div>
+        </div>
+        <div class="project-links">
+          <a class="primary" href="https://uk-crime-trends-forecast-2km7uvnzwmqwdkwnj6xu4s.streamlit.app/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
+            Live dashboard
+          </a>
+          <a href="https://github.com/Dinesh-0707/uk-crime-trends-forecast" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+            View code
+          </a>
+        </div>
+      </div>
+
+      <div class="project featured" data-tilt>
+        <div class="project-head">
+          <h3>Stock Market Data Pipeline &amp; NL-to-SQL</h3>
+          <span class="status-live"><span class="dot"></span>live</span>
+        </div>
+        <p class="desc">
+          End-to-end pipeline (Airflow, dbt, Delta Lake, Azure) building a Gold-layer
+          analytics schema from 50,000+ relational data points, feeding multi-page Power BI
+          dashboards and a natural-language-to-SQL interface for non-technical stakeholders.
+          The live demo below is a freely-hostable companion running the same staging → marts
+          SQL pattern and NL-to-SQL query box on live market data.
+        </p>
+        <div class="metric-row">
+          <div class="metric"><span class="num mono">-35%</span><span class="label">reporting turnaround</span></div>
+          <div class="metric"><span class="num mono">50k+</span><span class="label">data points modeled</span></div>
+        </div>
+        <div class="project-links">
+          <a class="primary" href="https://stock-nl-sql-demo-dwy26ueqy4gb3ybcbdohuk.streamlit.app/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
+            Live NL-to-SQL demo
+          </a>
+          <a href="https://github.com/Dinesh-0707/stock-data-pipeline" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+            Full pipeline code
+          </a>
+        </div>
+      </div>
+
+      <div class="project" data-tilt>
+        <div class="project-head">
+          <h3>British Airways Customer Sentiment &amp; Booking Analytics</h3>
+          <span class="project-tag">Virtual Simulation</span>
+        </div>
+        <p class="desc">
+          Scraped and processed customer review data with Python (BeautifulSoup), ran NLP
+          sentiment analysis to surface operational pain points, and built a predictive
+          classification model on booking behaviour to identify top conversion drivers.
+        </p>
+        <div class="project-links">
+          <a href="https://github.com/Dinesh-0707" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+            View code
+          </a>
+        </div>
+      </div>
+
+      <div class="project" data-tilt>
+        <div class="project-head">
+          <h3>Quantium Retail Customer Insights &amp; Sales Analytics</h3>
+          <span class="project-tag">Virtual Simulation</span>
+        </div>
+        <p class="desc">
+          Customer segmentation and exploratory analysis on large retail transaction
+          datasets in Python and R; statistical trial-vs-control store comparison to
+          quantify commercial impact of pricing and placement strategy.
+        </p>
+        <div class="project-links">
+          <a href="https://github.com/Dinesh-0707" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+            View code
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="section-head"><h2>Education</h2></div>
+    <div class="list-row">
+      <div>
+        <div class="school">Aston University, Birmingham</div>
+        <div class="degree">MSc Artificial Intelligence with Business Strategy</div>
+      </div>
+      <div class="when">2024–2025</div>
+    </div>
+    <div class="list-row">
+      <div>
+        <div class="school">Vels University, Chennai</div>
+        <div class="degree">BCA Data Science — First Class with Distinction, CGPA 8.04/10</div>
+      </div>
+      <div class="when">2021–2024</div>
+    </div>
+  </section>
+
+  <section id="certs">
+    <div class="section-head"><h2>Certifications</h2></div>
+    <div class="list-row">
+      <div>
+        <div class="school">Certified Data Analyst Track</div>
+        <div class="degree">NIIT Limited</div>
+      </div>
+      <span class="tag">Completed</span>
+    </div>
+    <div class="list-row">
+      <div>
+        <div class="school">Generative AI &amp; Applications</div>
+        <div class="degree">Udemy</div>
+      </div>
+      <span class="tag">Completed</span>
+    </div>
+    <div class="list-row">
+      <div>
+        <div class="school">PL-300: Power BI Data Analyst Associate</div>
+        <div class="degree">Microsoft</div>
+      </div>
+      <span class="tag pending">In progress</span>
+    </div>
+  </section>
+
+  <footer>
+    <span>Birmingham, UK · updated August 2026</span>
+    <div class="social">
+      <a href="mailto:dinesh070704@gmail.com" aria-label="Email" title="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
+      </a>
+      <a href="https://linkedin.com/in/dineshnavaneethan" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a href="https://github.com/Dinesh-0707" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+      </a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Hero floating cards: subtle mouse parallax
+  var stage = document.querySelector('.stage');
+  var floatCards = document.querySelectorAll('.float-card');
+  if (stage && floatCards.length && !reduceMotion) {
+    stage.addEventListener('mousemove', function (e) {
+      var rect = stage.getBoundingClientRect();
+      var px = (e.clientX - rect.left) / rect.width - 0.5;
+      var py = (e.clientY - rect.top) / rect.height - 0.5;
+      floatCards.forEach(function (card, i) {
+        var depth = (i + 1) * 6;
+        card.style.setProperty('--mx', (px * depth) + 'px');
+        card.style.setProperty('--my', (py * depth) + 'px');
+        card.style.translate = (px * depth) + 'px ' + (py * depth) + 'px';
+      });
+    });
+    stage.addEventListener('mouseleave', function () {
+      floatCards.forEach(function (card) { card.style.translate = '0 0'; });
+    });
+  }
+
+  // Project cards: 3D tilt + specular highlight following cursor
+  if (!reduceMotion) {
+    document.querySelectorAll('[data-tilt]').forEach(function (card) {
+      card.addEventListener('mousemove', function (e) {
+        var rect = card.getBoundingClientRect();
+        var x = (e.clientX - rect.left) / rect.width;
+        var y = (e.clientY - rect.top) / rect.height;
+        var rx = (0.5 - y) * 6;
+        var ry = (x - 0.5) * 8;
+        card.style.transform = 'perspective(900px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateZ(2px)';
+        card.style.setProperty('--mx', (x * 100) + '%');
+        card.style.setProperty('--my', (y * 100) + '%');
+      });
+      card.addEventListener('mouseleave', function () {
+        card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg)';
+      });
+    });
+  }
+})();
+</script>
