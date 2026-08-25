@@ -237,7 +237,7 @@
   .pill { font-size: 13px; padding: 5px 11px; border-radius: 7px; background: var(--surface-2); color: var(--ink); }
 
   /* ============ Projects — 3D tilt cards ============ */
-  .project-grid { perspective: 1400px; }
+  .project-grid { perspective: 1400px; display: flex; flex-direction: column; }
   .project {
     position: relative;
     background: var(--surface);
@@ -290,6 +290,54 @@
   .project-links a.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
   .project-links a.primary:hover { filter: brightness(1.07); color: var(--accent-ink); }
   .project-links a svg { width: 13px; height: 13px; }
+
+  /* ============ Case study details (Strategy / PM cards) ============ */
+  .case-details { margin: 4px 0 18px; }
+  .case-details summary {
+    cursor: pointer; font-weight: 700; font-size: 13.5px; color: var(--accent);
+    list-style: none; display: inline-flex; align-items: center; gap: 6px;
+  }
+  .case-details summary::-webkit-details-marker { display: none; }
+  .case-details summary::before {
+    content: "▸"; font-size: 11px; transition: transform 0.15s ease;
+  }
+  .case-details[open] summary::before { transform: rotate(90deg); }
+  .case-body { margin-top: 16px; display: flex; flex-direction: column; gap: 16px; }
+  .case-block h4 {
+    font-family: "IBM Plex Mono", monospace; font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.06em; color: var(--muted); font-weight: 600; margin-bottom: 6px;
+  }
+  .case-block p { margin: 0; font-size: 14.5px; color: var(--ink); max-width: 66ch; }
+
+  .rice-table-wrap { overflow-x: auto; margin-top: 8px; border: 1px solid var(--rule); border-radius: 10px; }
+  table.rice-table { border-collapse: collapse; width: 100%; min-width: 460px; font-size: 13.5px; }
+  table.rice-table th, table.rice-table td {
+    text-align: left; padding: 9px 13px; border-bottom: 1px solid var(--rule);
+    font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums;
+  }
+  table.rice-table th { background: var(--surface-2); font-weight: 600; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  table.rice-table td:first-child, table.rice-table th:first-child { font-family: "Work Sans", sans-serif; font-weight: 500; }
+  table.rice-table tr:last-child td { border-bottom: none; }
+  table.rice-table td.score { color: var(--accent); font-weight: 700; }
+  p.rice-note { font-size: 12.5px; color: var(--muted); margin: 8px 0 0; }
+
+  /* ============ Lens switcher ============ */
+  .lens-switcher { margin-top: 32px; }
+  .lens-label {
+    font-family: "IBM Plex Mono", monospace; font-size: 11.5px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--stage-muted); margin-bottom: 10px;
+  }
+  .lens-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .lens-btn {
+    font-family: "Work Sans", sans-serif; font-size: 13px; font-weight: 600;
+    padding: 9px 15px; border-radius: 999px; cursor: pointer;
+    background: transparent; color: var(--stage-muted); border: 1px solid var(--stage-rule);
+    transition: all 0.15s ease;
+  }
+  .lens-btn:hover { color: var(--stage-ink); border-color: var(--rule-strong); }
+  .lens-btn[aria-pressed="true"] {
+    background: var(--accent); color: var(--accent-ink); border-color: var(--accent);
+  }
 
   .status-live { font-size: 11.5px; font-family: "IBM Plex Mono", monospace; color: var(--accent); display: inline-flex; align-items: center; gap: 6px; font-weight: 600; }
   .status-live .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); animation: pulse 2.2s ease-in-out infinite; }
@@ -358,11 +406,21 @@
   <div class="stage-grid" aria-hidden="true"></div>
   <div class="stage-glow" aria-hidden="true"></div>
   <div class="stage-inner">
-    <div class="eyebrow">Data &amp; Business Analytics Portfolio</div>
+    <div class="eyebrow" id="eyebrow">Data &amp; Business Analytics Portfolio</div>
     <h1 class="name">Dinesh Navaneethan</h1>
-    <div class="role-line">
+    <div class="role-line" id="role-line">
       <strong>Data Analyst</strong> — Power BI, SQL &amp; Python — MSc AI with Business
       Strategy, Aston University. I turn data into decisions people act on.
+    </div>
+
+    <div class="lens-switcher">
+      <div class="lens-label">Viewing this profile as a</div>
+      <div class="lens-row" role="group" aria-label="Choose how to view this portfolio">
+        <button class="lens-btn" type="button" data-lens="analyst" aria-pressed="true">Data Analyst</button>
+        <button class="lens-btn" type="button" data-lens="engineer" aria-pressed="false">Data Engineer</button>
+        <button class="lens-btn" type="button" data-lens="strategy" aria-pressed="false">Business Strategy</button>
+        <button class="lens-btn" type="button" data-lens="product" aria-pressed="false">Product</button>
+      </div>
     </div>
 
     <div class="badges">
@@ -406,7 +464,7 @@
       </div>
       <div class="float-card fc-3">
         <div class="k">Core Stack</div>
-        <div class="v">SQL · <em>Power BI</em> · Python</div>
+        <div class="v" id="core-stack">SQL · <em>Power BI</em> · Python</div>
       </div>
     </div>
   </div>
@@ -428,7 +486,7 @@
   <section id="skills">
     <div class="section-head"><h2>Skills</h2></div>
     <div class="skill-grid">
-      <div class="skill-card">
+      <div class="skill-card" id="skill-analytics">
         <h3>Data &amp; Analytics</h3>
         <div class="pill-row">
           <span class="pill">SQL</span><span class="pill">Power BI / DAX</span>
@@ -436,7 +494,16 @@
           <span class="pill">R</span><span class="pill">Excel</span>
         </div>
       </div>
-      <div class="skill-card">
+      <div class="skill-card" id="skill-engineering">
+        <h3>Data Engineering</h3>
+        <div class="pill-row">
+          <span class="pill">Apache Airflow</span><span class="pill">dbt</span>
+          <span class="pill">Delta Lake</span><span class="pill">Azure</span>
+          <span class="pill">Docker</span><span class="pill">Great Expectations</span>
+          <span class="pill">CI/CD</span>
+        </div>
+      </div>
+      <div class="skill-card" id="skill-strategy">
         <h3>Business &amp; Strategy</h3>
         <div class="pill-row">
           <span class="pill">Requirements gathering</span><span class="pill">BPMN</span>
@@ -444,11 +511,12 @@
           <span class="pill">Stakeholder mgmt</span>
         </div>
       </div>
-      <div class="skill-card">
+      <div class="skill-card" id="skill-delivery">
         <h3>Delivery</h3>
         <div class="pill-row">
           <span class="pill">Agile / Scrum</span><span class="pill">Sprint planning</span>
           <span class="pill">Data storytelling</span><span class="pill">Client comms</span>
+          <span class="pill">Prioritization (RICE)</span>
         </div>
       </div>
     </div>
@@ -456,12 +524,16 @@
 
   <section id="projects">
     <div class="section-head">
-      <h2>Projects</h2>
-      <span class="count">5 shipped</span>
+      <h2>Projects &amp; Case Studies</h2>
+      <span class="count" id="project-count">7 total</span>
     </div>
+    <p class="lede" style="margin-bottom: 26px;">
+      Viewing as <strong id="lens-label">Data Analyst</strong> — the lens above changes which
+      of these lead. Everything stays visible either way.
+    </p>
 
     <div class="project-grid">
-      <div class="project featured" data-tilt>
+      <div class="project featured" data-tilt id="proj-house-price">
         <div class="project-head">
           <h3>UK Regional House Price Monitor</h3>
           <span class="status-live"><span class="dot"></span>live</span>
@@ -489,7 +561,7 @@
         </div>
       </div>
 
-      <div class="project featured" data-tilt>
+      <div class="project featured" data-tilt id="proj-crime">
         <div class="project-head">
           <h3>UK City Crime Trends &amp; Forecast</h3>
           <span class="status-live"><span class="dot"></span>live</span>
@@ -516,7 +588,7 @@
         </div>
       </div>
 
-      <div class="project featured" data-tilt>
+      <div class="project featured" data-tilt id="proj-stock-pipeline">
         <div class="project-head">
           <h3>Stock Market Data Pipeline &amp; NL-to-SQL</h3>
           <span class="status-live"><span class="dot"></span>live</span>
@@ -544,7 +616,7 @@
         </div>
       </div>
 
-      <div class="project" data-tilt>
+      <div class="project" data-tilt id="proj-ba">
         <div class="project-head">
           <h3>British Airways Customer Sentiment &amp; Booking Analytics</h3>
           <span class="project-tag">Virtual Simulation</span>
@@ -562,7 +634,7 @@
         </div>
       </div>
 
-      <div class="project" data-tilt>
+      <div class="project" data-tilt id="proj-quantium">
         <div class="project-head">
           <h3>Quantium Retail Customer Insights &amp; Sales Analytics</h3>
           <span class="project-tag">Virtual Simulation</span>
@@ -576,6 +648,100 @@
           <a href="https://github.com/Dinesh-0707" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
             View code
+          </a>
+        </div>
+      </div>
+
+      <div class="project" data-tilt id="proj-strategy">
+        <div class="project-head">
+          <h3>Aritzia Market Expansion Strategy</h3>
+          <span class="project-tag">Aston University Consulting Project</span>
+        </div>
+        <p class="desc">
+          Evaluated corporate growth strategy for an international retail expansion using
+          SWOT, PESTLE, and Porter's Five Forces, then formulated a data-backed strategic
+          roadmap addressing supply chain resilience, brand equity, and competitive
+          positioning — presented in an executive consulting format simulating a real
+          client engagement.
+        </p>
+        <details class="case-details">
+          <summary>Read the case study approach</summary>
+          <div class="case-body">
+            <div class="case-block">
+              <h4>Frameworks applied</h4>
+              <p>SWOT, PESTLE, and Porter's Five Forces, used together to evaluate the
+              risk profile of entering a new international market — internal capability
+              (SWOT), macro environment (PESTLE), and competitive intensity (Porter's).</p>
+            </div>
+            <div class="case-block">
+              <h4>What the analysis covered</h4>
+              <p>Supply chain resilience under expansion, existing brand equity in the
+              target market, and competitive positioning against incumbents already
+              operating there.</p>
+            </div>
+            <div class="case-block">
+              <h4>Output</h4>
+              <p>A data-backed strategic roadmap and a set of expansion recommendations,
+              delivered in an executive consulting presentation format — the same
+              structure used in real client advisory engagements.</p>
+            </div>
+          </div>
+        </details>
+        <div class="project-links">
+          <span class="project-tag">No public repo — academic strategy project</span>
+        </div>
+      </div>
+
+      <div class="project featured" data-tilt id="proj-pm">
+        <div class="project-head">
+          <h3>Prioritizing the Crime Trends Dashboard Roadmap</h3>
+          <span class="project-tag">Personal Case Study</span>
+        </div>
+        <p class="desc">
+          A self-directed product exercise: applying RICE prioritization to a real,
+          live product — the <a href="#proj-crime">UK City Crime Trends &amp; Forecast</a>
+          dashboard above — to decide what it should build next and why. Framed as a
+          product decision, not just an engineering backlog.
+        </p>
+        <details class="case-details">
+          <summary>Read the product case study</summary>
+          <div class="case-body">
+            <div class="case-block">
+              <h4>Problem</h4>
+              <p>The dashboard shows city-level trends well, but a local-authority or
+              insurance analyst — its most likely real user — needs finer resolution and
+              a way to act on what they see, not just view it.</p>
+            </div>
+            <div class="case-block">
+              <h4>Candidate features, scored with RICE</h4>
+              <div class="rice-table-wrap">
+                <table class="rice-table">
+                  <thead>
+                    <tr><th>Feature</th><th>Reach</th><th>Impact</th><th>Confidence</th><th>Effort</th><th>Score</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Postcode-level drill-down</td><td>8</td><td>9</td><td>7</td><td>5</td><td class="score">100.8</td></tr>
+                    <tr><td>Threshold alerting per city</td><td>4</td><td>9</td><td>5</td><td>8</td><td class="score">22.5</td></tr>
+                    <tr><td>CSV / forecast export</td><td>6</td><td>5</td><td>9</td><td>2</td><td class="score">135.0</td></tr>
+                    <tr><td>Custom date-range comparison</td><td>5</td><td>5</td><td>7</td><td>4</td><td class="score">43.8</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="rice-note">Reach/Impact/Confidence scored 1–10, Effort in person-days. Score = (R × I × C) / E.</p>
+            </div>
+            <div class="case-block">
+              <h4>Resulting 1-quarter roadmap</h4>
+              <p><strong>Now:</strong> CSV/forecast export (highest score, lowest effort — ships first).
+              <strong>Next:</strong> Postcode-level drill-down (highest reach × impact, worth the extra effort).
+              <strong>Later:</strong> Custom date-range comparison, then threshold alerting once usage data
+              justifies the build cost.</p>
+            </div>
+          </div>
+        </details>
+        <div class="project-links">
+          <a class="primary" href="https://uk-crime-trends-forecast-2km7uvnzwmqwdkwnj6xu4s.streamlit.app/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
+            See the live product
           </a>
         </div>
       </div>
@@ -684,5 +850,114 @@
       });
     });
   }
+})();
+
+(function () {
+  var lensConfig = {
+    analyst: {
+      eyebrow: 'Data &amp; Business Analytics Portfolio',
+      roleHTML: '<strong>Data Analyst</strong> — Power BI, SQL &amp; Python — MSc AI with Business Strategy, Aston University. I turn data into decisions people act on.',
+      coreStack: 'SQL · <em>Power BI</em> · Python',
+      label: 'Data Analyst',
+      projects: {
+        'proj-house-price': { order: 0, featured: true },
+        'proj-crime': { order: 1, featured: true },
+        'proj-stock-pipeline': { order: 2, featured: true },
+        'proj-ba': { order: 3, featured: false },
+        'proj-quantium': { order: 4, featured: false },
+        'proj-strategy': { order: 5, featured: false },
+        'proj-pm': { order: 6, featured: false }
+      },
+      skills: { 'skill-analytics': 0, 'skill-strategy': 1, 'skill-delivery': 2, 'skill-engineering': 3 }
+    },
+    engineer: {
+      eyebrow: 'Data Engineering Portfolio',
+      roleHTML: '<strong>Data Engineer</strong> — Python, SQL &amp; Pipelines (Airflow, dbt) — MSc AI with Business Strategy, Aston University. I build the pipelines analytics runs on.',
+      coreStack: 'Airflow · <em>dbt</em> · Python',
+      label: 'Data Engineer',
+      projects: {
+        'proj-stock-pipeline': { order: 0, featured: true },
+        'proj-house-price': { order: 1, featured: true },
+        'proj-crime': { order: 2, featured: true },
+        'proj-pm': { order: 3, featured: false },
+        'proj-ba': { order: 4, featured: false },
+        'proj-quantium': { order: 5, featured: false },
+        'proj-strategy': { order: 6, featured: false }
+      },
+      skills: { 'skill-engineering': 0, 'skill-analytics': 1, 'skill-delivery': 2, 'skill-strategy': 3 }
+    },
+    strategy: {
+      eyebrow: 'Business Strategy &amp; Analytics Portfolio',
+      roleHTML: '<strong>Business Strategy &amp; Analytics</strong> — MSc AI with Business Strategy, Aston University. I turn market analysis into a recommendation leadership can act on.',
+      coreStack: 'SWOT · <em>PESTLE</em> · Porter’s',
+      label: 'Business Strategy',
+      projects: {
+        'proj-strategy': { order: 0, featured: true },
+        'proj-pm': { order: 1, featured: true },
+        'proj-house-price': { order: 2, featured: false },
+        'proj-crime': { order: 3, featured: false },
+        'proj-stock-pipeline': { order: 4, featured: false },
+        'proj-ba': { order: 5, featured: false },
+        'proj-quantium': { order: 6, featured: false }
+      },
+      skills: { 'skill-strategy': 0, 'skill-delivery': 1, 'skill-analytics': 2, 'skill-engineering': 3 }
+    },
+    product: {
+      eyebrow: 'Product-Minded Analyst Portfolio',
+      roleHTML: '<strong>Product-Minded Analyst</strong> — Data → Product Decisions — MSc AI with Business Strategy, Aston University. I turn user and data signals into a prioritized roadmap.',
+      coreStack: 'RICE · <em>Roadmaps</em> · SQL',
+      label: 'Product',
+      projects: {
+        'proj-pm': { order: 0, featured: true },
+        'proj-crime': { order: 1, featured: true },
+        'proj-house-price': { order: 2, featured: false },
+        'proj-stock-pipeline': { order: 3, featured: false },
+        'proj-strategy': { order: 4, featured: false },
+        'proj-ba': { order: 5, featured: false },
+        'proj-quantium': { order: 6, featured: false }
+      },
+      skills: { 'skill-delivery': 0, 'skill-analytics': 1, 'skill-strategy': 2, 'skill-engineering': 3 }
+    }
+  };
+
+  function applyLens(lensId) {
+    var cfg = lensConfig[lensId];
+    if (!cfg) return;
+
+    var eyebrowEl = document.getElementById('eyebrow');
+    var roleEl = document.getElementById('role-line');
+    var coreStackEl = document.getElementById('core-stack');
+    var lensLabelEl = document.getElementById('lens-label');
+    if (eyebrowEl) eyebrowEl.innerHTML = cfg.eyebrow;
+    if (roleEl) roleEl.innerHTML = cfg.roleHTML;
+    if (coreStackEl) coreStackEl.innerHTML = cfg.coreStack;
+    if (lensLabelEl) lensLabelEl.textContent = cfg.label;
+
+    Object.keys(cfg.projects).forEach(function (id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var p = cfg.projects[id];
+      el.style.order = p.order;
+      el.classList.toggle('featured', !!p.featured);
+    });
+
+    Object.keys(cfg.skills).forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.style.order = cfg.skills[id];
+    });
+
+    document.querySelectorAll('.lens-btn').forEach(function (btn) {
+      var active = btn.getAttribute('data-lens') === lensId;
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+  }
+
+  document.querySelectorAll('.lens-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      applyLens(btn.getAttribute('data-lens'));
+    });
+  });
+
+  applyLens('analyst');
 })();
 </script>
