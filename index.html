@@ -237,6 +237,30 @@
   .pill { font-size: 13px; padding: 5px 11px; border-radius: 7px; background: var(--surface-2); color: var(--ink); }
 
   /* ============ Projects ============ */
+  .domain-filter-row {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    margin-bottom: 22px;
+  }
+  .domain-filter-row label {
+    font-family: "IBM Plex Mono", monospace; font-size: 12px;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted);
+  }
+  .domain-select {
+    appearance: none; -webkit-appearance: none;
+    font-family: "Work Sans", sans-serif; font-size: 14px; font-weight: 600;
+    color: var(--ink); background: var(--surface);
+    border: 1px solid var(--rule-strong); border-radius: 8px;
+    padding: 9px 36px 9px 14px;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B606E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 12px center; background-size: 16px;
+  }
+  .domain-select:hover { border-color: var(--accent); }
+  .domain-select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .domain-filter-row .domain-count { font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--muted); }
+  .project.domain-hidden { display: none; }
+
   .project-grid { display: flex; flex-direction: column; }
   .project {
     position: relative;
@@ -531,13 +555,25 @@
       <h2>Projects &amp; Case Studies</h2>
       <span class="count" id="project-count">8 total</span>
     </div>
-    <p class="lede" style="margin-bottom: 26px;">
+    <p class="lede" style="margin-bottom: 18px;">
       Viewing as <strong id="lens-label">Data Analyst</strong> — the lens above changes which
       of these lead. Everything stays visible either way.
     </p>
 
+    <div class="domain-filter-row">
+      <label for="domain-select">Filter by domain</label>
+      <select class="domain-select" id="domain-select">
+        <option value="all">All domains</option>
+        <option value="ai">AI &amp; Agents</option>
+        <option value="engineering">Data Engineering</option>
+        <option value="analytics">Data &amp; Analytics</option>
+        <option value="strategy">Business &amp; Strategy</option>
+      </select>
+      <span class="domain-count" id="domain-count">8 of 8 shown</span>
+    </div>
+
     <div class="project-grid">
-      <div class="project featured" id="proj-voice">
+      <div class="project featured" id="proj-voice" data-domain="ai">
         <div class="project-head">
           <h3>Longitudinal Forensic Voice Comparison System</h3>
           <span class="status-live"><span class="dot"></span>live</span>
@@ -565,7 +601,7 @@
         </div>
       </div>
 
-      <div class="project featured" id="proj-intake">
+      <div class="project featured" id="proj-intake" data-domain="ai engineering">
         <div class="project-head">
           <h3>Intake — AI Intake Automation for Small Law Firms</h3>
           <span class="status-live"><span class="dot"></span>live</span>
@@ -593,7 +629,7 @@
         </div>
       </div>
 
-      <div class="project featured" id="proj-house-price">
+      <div class="project featured" id="proj-house-price" data-domain="analytics">
         <div class="project-head">
           <h3>UK Regional House Price Monitor</h3>
           <span class="status-live"><span class="dot"></span>live</span>
@@ -621,7 +657,7 @@
         </div>
       </div>
 
-      <div class="project featured" id="proj-crime">
+      <div class="project featured" id="proj-crime" data-domain="analytics">
         <div class="project-head">
           <h3>UK City Crime Trends &amp; Forecast</h3>
           <span class="status-live"><span class="dot"></span>live</span>
@@ -648,7 +684,7 @@
         </div>
       </div>
 
-      <div class="project featured" id="proj-stock-pipeline">
+      <div class="project featured" id="proj-stock-pipeline" data-domain="engineering ai">
         <div class="project-head">
           <h3>Stock Market Data Pipeline &amp; NL-to-SQL</h3>
           <span class="status-live"><span class="dot"></span>live</span>
@@ -676,7 +712,7 @@
         </div>
       </div>
 
-      <div class="project" id="proj-ba">
+      <div class="project" id="proj-ba" data-domain="analytics">
         <div class="project-head">
           <h3>British Airways Customer Sentiment &amp; Booking Analytics</h3>
           <span class="project-tag">Forage Job Simulation</span>
@@ -700,7 +736,7 @@
         </div>
       </div>
 
-      <div class="project" id="proj-quantium">
+      <div class="project" id="proj-quantium" data-domain="analytics">
         <div class="project-head">
           <h3>Quantium Retail Customer Insights &amp; Sales Analytics</h3>
           <span class="project-tag">Forage Job Simulation</span>
@@ -723,7 +759,7 @@
         </div>
       </div>
 
-      <div class="project featured" id="proj-pm">
+      <div class="project featured" id="proj-pm" data-domain="strategy">
         <div class="project-head">
           <h3>Prioritizing the Crime Trends Dashboard Roadmap</h3>
           <span class="project-tag">Personal Case Study</span>
@@ -983,5 +1019,26 @@
   });
 
   applyLens('analyst');
+
+  var domainSelect = document.getElementById('domain-select');
+  var domainCountEl = document.getElementById('domain-count');
+  var allProjectEls = document.querySelectorAll('.project[data-domain]');
+
+  function applyDomainFilter(domain) {
+    var shown = 0;
+    allProjectEls.forEach(function (el) {
+      var domains = (el.getAttribute('data-domain') || '').split(' ');
+      var match = domain === 'all' || domains.indexOf(domain) !== -1;
+      el.classList.toggle('domain-hidden', !match);
+      if (match) shown++;
+    });
+    if (domainCountEl) domainCountEl.textContent = shown + ' of ' + allProjectEls.length + ' shown';
+  }
+
+  if (domainSelect) {
+    domainSelect.addEventListener('change', function () {
+      applyDomainFilter(domainSelect.value);
+    });
+  }
 })();
 </script>
