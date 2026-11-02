@@ -473,7 +473,7 @@
     <div class="float-stack">
       <div class="float-card fc-1">
         <div class="k">Live Projects</div>
-        <div class="v"><em>8</em> deployed apps</div>
+        <div class="v"><em>5</em> deployed apps</div>
       </div>
       <div class="float-card fc-2">
         <div class="k">AI Toolkit</div>
@@ -527,9 +527,9 @@
         <h3>Data Engineering</h3>
         <div class="pill-row">
           <span class="pill">Apache Airflow</span><span class="pill">dbt</span>
-          <span class="pill">Delta Lake</span><span class="pill">Azure</span>
+          <span class="pill">Delta Lake</span><span class="pill">PostgreSQL</span>
           <span class="pill">Docker</span><span class="pill">ETL</span>
-          <span class="pill">CI/CD</span>
+          <span class="pill">DuckDB</span><span class="pill">Data quality testing</span>
         </div>
       </div>
       <div class="skill-card" id="skill-strategy">
@@ -554,11 +554,12 @@
   <section id="projects">
     <div class="section-head">
       <h2>Projects &amp; Case Studies</h2>
-      <span class="count" id="project-count">10 total</span>
+      <span class="count" id="project-count">9 total</span>
     </div>
     <p class="lede" style="margin-bottom: 18px;">
       Viewing as <strong id="lens-label">Data Analyst</strong> — the lens above changes which
-      of these lead. Everything stays visible either way.
+      of these lead. Everything stays visible either way. Live demos run on free hosting, so
+      one that has been idle may take about 30 seconds to wake up.
     </p>
 
     <div class="domain-filter-row">
@@ -570,7 +571,7 @@
         <option value="analytics">Data &amp; Analytics</option>
         <option value="strategy">Business &amp; Strategy</option>
       </select>
-      <span class="domain-count" id="domain-count">10 of 10 shown</span>
+      <span class="domain-count" id="domain-count">9 of 9 shown</span>
     </div>
 
     <div class="project-grid">
@@ -582,11 +583,11 @@
         <p class="desc">
           MSc dissertation — a speaker verification system using SpeechBrain's ECAPA-TDNN
           model to convert audio into speaker embeddings, compared with cosine similarity
-          to decide whether two clips are the same speaker. Backend built with Flask and a
-          SQL-backed metadata store.
+          to decide whether two clips are the same speaker, with the decision threshold chosen
+          by sweeping for the best cut-off on LibriSpeech clips (6 speakers × 4 clips).
         </p>
         <div class="metric-row">
-          <div class="metric"><span class="num mono">98.2%</span><span class="label">verification accuracy</span></div>
+          <div class="metric"><span class="num mono">98.2%</span><span class="label">accuracy (threshold tuned on the same pairs)</span></div>
           <div class="metric"><span class="num mono">276</span><span class="label">pairwise comparisons</span></div>
           <div class="metric"><span class="num mono">192-d</span><span class="label">speaker embeddings</span></div>
         </div>
@@ -624,34 +625,6 @@
             Live demo
           </a>
           <a href="https://github.com/Dinesh-0707/law-firm-intake" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
-            View code
-          </a>
-        </div>
-      </div>
-
-      <div class="project featured" id="proj-ring" data-domain="ai engineering">
-        <div class="project-head">
-          <h3>Ring — AI Voice Agent for Home Service Trades</h3>
-          <span class="status-live"><span class="dot"></span>live</span>
-        </div>
-        <p class="desc">
-          A working AI intake agent for HVAC, plumbing, and roofing businesses: a Gemini agent
-          with function-calling tools that triages the issue, checks technician availability,
-          and books the job straight into a real Postgres database — live over web chat or a
-          real Twilio phone line, with an authenticated dispatch board for technician
-          assignment. A scripted walkthrough is also included for a quick, no-typing look.
-        </p>
-        <div class="metric-row">
-          <div class="metric"><span class="num mono">live</span><span class="label">Gemini agent, function-calling</span></div>
-          <div class="metric"><span class="num mono">real</span><span class="label">DB + Twilio voice line</span></div>
-        </div>
-        <div class="project-links">
-          <a class="primary" href="https://trades-voice-agent.vercel.app/" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
-            Live demo
-          </a>
-          <a href="https://github.com/Dinesh-0707/trades-voice-agent" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
             View code
           </a>
@@ -1008,10 +981,9 @@
         'proj-energy': { order: 3, featured: false },
         'proj-stock-pipeline': { order: 4, featured: false },
         'proj-intake': { order: 5, featured: false },
-        'proj-ring': { order: 6, featured: false },
-        'proj-ba': { order: 7, featured: false },
-        'proj-quantium': { order: 8, featured: false },
-        'proj-pm': { order: 9, featured: false }
+        'proj-ba': { order: 6, featured: false },
+        'proj-quantium': { order: 7, featured: false },
+        'proj-pm': { order: 8, featured: false }
       },
       skills: { 'skill-analytics': 0, 'skill-ai': 1, 'skill-strategy': 2, 'skill-delivery': 3, 'skill-engineering': 4 }
     },
@@ -1027,10 +999,9 @@
         'proj-house-price': { order: 3, featured: true },
         'proj-crime': { order: 4, featured: false },
         'proj-intake': { order: 5, featured: false },
-        'proj-ring': { order: 6, featured: false },
-        'proj-pm': { order: 7, featured: false },
-        'proj-ba': { order: 8, featured: false },
-        'proj-quantium': { order: 9, featured: false }
+        'proj-pm': { order: 6, featured: false },
+        'proj-ba': { order: 7, featured: false },
+        'proj-quantium': { order: 8, featured: false }
       },
       skills: { 'skill-engineering': 0, 'skill-analytics': 1, 'skill-ai': 2, 'skill-delivery': 3, 'skill-strategy': 4 }
     },
@@ -1042,14 +1013,13 @@
       projects: {
         'proj-pm': { order: 0, featured: true },
         'proj-intake': { order: 1, featured: true },
-        'proj-ring': { order: 2, featured: true },
-        'proj-stock-pipeline': { order: 3, featured: true },
-        'proj-energy': { order: 4, featured: false },
-        'proj-house-price': { order: 5, featured: false },
-        'proj-crime': { order: 6, featured: false },
-        'proj-voice': { order: 7, featured: false },
-        'proj-ba': { order: 8, featured: false },
-        'proj-quantium': { order: 9, featured: false }
+        'proj-stock-pipeline': { order: 2, featured: true },
+        'proj-energy': { order: 3, featured: false },
+        'proj-house-price': { order: 4, featured: false },
+        'proj-crime': { order: 5, featured: false },
+        'proj-voice': { order: 6, featured: false },
+        'proj-ba': { order: 7, featured: false },
+        'proj-quantium': { order: 8, featured: false }
       },
       skills: { 'skill-strategy': 0, 'skill-delivery': 1, 'skill-analytics': 2, 'skill-ai': 3, 'skill-engineering': 4 }
     },
@@ -1061,14 +1031,13 @@
       projects: {
         'proj-pm': { order: 0, featured: true },
         'proj-intake': { order: 1, featured: true },
-        'proj-ring': { order: 2, featured: true },
-        'proj-crime': { order: 3, featured: true },
-        'proj-house-price': { order: 4, featured: false },
-        'proj-energy': { order: 5, featured: false },
-        'proj-stock-pipeline': { order: 6, featured: false },
-        'proj-voice': { order: 7, featured: false },
-        'proj-ba': { order: 8, featured: false },
-        'proj-quantium': { order: 9, featured: false }
+        'proj-crime': { order: 2, featured: true },
+        'proj-house-price': { order: 3, featured: false },
+        'proj-energy': { order: 4, featured: false },
+        'proj-stock-pipeline': { order: 5, featured: false },
+        'proj-voice': { order: 6, featured: false },
+        'proj-ba': { order: 7, featured: false },
+        'proj-quantium': { order: 8, featured: false }
       },
       skills: { 'skill-delivery': 0, 'skill-analytics': 1, 'skill-ai': 2, 'skill-strategy': 3, 'skill-engineering': 4 }
     }
