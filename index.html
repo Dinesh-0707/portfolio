@@ -1,1108 +1,299 @@
-<title>Dinesh Navaneethan</title>
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dinesh Navaneethan · Junior Data Engineer</title>
+<meta name="description" content="Junior data engineer in Birmingham, UK. Python and SQL pipelines with Airflow, dbt, PostgreSQL and Docker.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Work+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #F4F5F8;
-    --surface: #FFFFFF;
-    --surface-2: #ECEEF3;
-    --ink: #12141B;
-    --muted: #5B606E;
-    --rule: #DFE2E9;
-    --rule-strong: #C7CBD6;
-    --accent: #1B6B50;
-    --accent-ink: #FFFFFF;
-    --accent-soft: #E1EEE7;
-    --stage: #0E1013;
-    --stage-surface: #191D22;
-    --stage-ink: #EEF0F2;
-    --stage-muted: #97A0AA;
-    --stage-rule: #262B32;
-    --shadow-sm: 0 1px 2px rgba(18, 20, 27, 0.05);
-    --shadow-md: 0 2px 4px rgba(18, 20, 27, 0.05), 0 12px 28px rgba(18, 20, 27, 0.09);
-    --shadow-lg: 0 6px 12px rgba(18, 20, 27, 0.08), 0 24px 56px rgba(18, 20, 27, 0.16);
+    --bg: #fbfaf7;
+    --ink: #1d1d1b;
+    --muted: #5e5d58;
+    --rule: #e4e1d8;
+    --accent: #1f5c4a;
   }
-
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #0E1013;
-      --surface: #191D22;
-      --surface-2: #20252B;
-      --ink: #EEF0F2;
-      --muted: #97A0AA;
-      --rule: #262B32;
-      --rule-strong: #333A43;
-      --accent: #3FA382;
-      --accent-ink: #06140F;
-      --accent-soft: #17332A;
-      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
-      --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.3), 0 14px 32px rgba(0, 0, 0, 0.4);
-      --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.35), 0 28px 60px rgba(0, 0, 0, 0.5);
+      --bg: #161614;
+      --ink: #ebe9e3;
+      --muted: #a3a19a;
+      --rule: #2f2e2a;
+      --accent: #7cc4ab;
     }
   }
   :root[data-theme="dark"] {
-    --bg: #0E1013;
-    --surface: #191D22;
-    --surface-2: #20252B;
-    --ink: #EEF0F2;
-    --muted: #97A0AA;
-    --rule: #262B32;
-    --rule-strong: #333A43;
-    --accent: #3FA382;
-    --accent-ink: #06140F;
-    --accent-soft: #17332A;
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
-    --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.3), 0 14px 32px rgba(0, 0, 0, 0.4);
-    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.35), 0 28px 60px rgba(0, 0, 0, 0.5);
+    --bg: #161614;
+    --ink: #ebe9e3;
+    --muted: #a3a19a;
+    --rule: #2f2e2a;
+    --accent: #7cc4ab;
   }
 
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
-  }
-
+  html { -webkit-text-size-adjust: 100%; }
   body {
     margin: 0;
     background: var(--bg);
     color: var(--ink);
-    font-family: "Work Sans", ui-sans-serif, system-ui, sans-serif;
-    line-height: 1.6;
+    font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   }
+  main { max-width: 720px; margin: 0 auto; padding: 64px 16px 48px; }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:hover { text-decoration-thickness: 2px; }
 
-  ::selection { background: var(--accent-soft); color: var(--ink); }
-  a { color: var(--accent); }
-  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  h1, h3 { font-family: "Source Serif 4", Georgia, serif; font-weight: 600; line-height: 1.25; }
+  h1 { font-size: 40px; margin: 0 0 4px; letter-spacing: -0.01em; }
+  h2 {
+    font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--muted); margin: 56px 0 20px; padding-bottom: 8px; border-bottom: 1px solid var(--rule);
+  }
+  h3 { font-size: 22px; margin: 0 0 6px; }
 
-  .serif { font-family: "Newsreader", ui-serif, Georgia, serif; }
-  .mono { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace; font-variant-numeric: tabular-nums; }
+  .role { font-size: 20px; color: var(--muted); margin: 0 0 20px; }
+  .intro { margin: 0 0 20px; }
+  .meta { color: var(--muted); font-size: 15px; margin: 0 0 8px; }
+  .links { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 15px; margin: 0; padding: 0; list-style: none; }
 
-  h1, h2, h3 { text-wrap: balance; margin: 0; }
+  .project { margin: 0 0 44px; }
+  .project:last-child { margin-bottom: 0; }
+  .project p { margin: 0 0 10px; }
+  .project ul { margin: 0 0 12px; padding-left: 20px; }
+  .project li { margin-bottom: 6px; }
+  .stack {
+    font-family: "IBM Plex Mono", ui-monospace, Consolas, monospace; font-size: 13.5px; color: var(--muted);
+  }
+  .project-links { font-size: 15px; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+  figure { margin: 4px 0 14px; }
+  figure img { width: 100%; height: auto; display: block; border: 1px solid var(--rule); border-radius: 4px; background: #fff; }
+  figcaption { font-size: 13.5px; color: var(--muted); margin-top: 6px; }
+  .note { font-size: 14px; color: var(--muted); margin-top: 40px; }
 
-  /* ============ Nav ============ */
-  .topbar {
-    position: sticky; top: 0; z-index: 40;
-    background: color-mix(in srgb, var(--bg) 85%, transparent);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--rule);
-  }
-  .topbar-inner {
-    max-width: 1040px; margin: 0 auto; padding: 15px 28px;
-    display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  }
-  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
-  .brand-mark {
-    width: 30px; height: 30px; position: relative; flex-shrink: 0;
-    transform-style: preserve-3d; perspective: 200px;
-  }
-  .brand-mark .sq {
-    position: absolute; inset: 0; border-radius: 6px;
-    background: var(--accent);
-  }
-  .brand-mark .sq:first-child { opacity: 0.35; transform: translate(3px, 3px) rotateZ(8deg); }
-  .brand-mark .sq:last-child { transform: rotateZ(-6deg); }
-  .brand span.name { font-family: "Newsreader", serif; font-weight: 600; font-size: 16.5px; }
-  nav.links { display: flex; gap: 28px; font-size: 13.5px; font-weight: 600; }
-  nav.links a { color: var(--muted); text-decoration: none; }
-  nav.links a:hover { color: var(--accent); }
-  .cta-row { display: flex; gap: 10px; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 7px;
-    padding: 9px 16px; font-size: 13.5px; font-weight: 700;
-    text-decoration: none; border-radius: 8px; white-space: nowrap;
-  }
-  .btn-primary { background: var(--accent); color: var(--accent-ink); box-shadow: var(--shadow-sm); }
-  .btn-primary:hover { filter: brightness(1.07); }
-  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--rule-strong); }
-  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
-  @media (max-width: 760px) { nav.links { display: none; } }
+  .other { list-style: none; margin: 0; padding: 0; }
+  .other li { padding: 12px 0; border-bottom: 1px solid var(--rule); }
+  .other li:first-child { padding-top: 0; }
+  .other li:last-child { border-bottom: 0; }
+  .other span { display: block; color: var(--muted); font-size: 15px; }
 
-  /* ============ Hero stage (dark, 3D) ============ */
-  .stage {
-    position: relative;
-    background: var(--stage);
-    color: var(--stage-ink);
-    overflow: hidden;
-    padding: 84px 28px 120px;
-  }
-  .stage-grid {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(color-mix(in srgb, var(--accent) 16%, transparent) 1px, transparent 1px),
-      linear-gradient(90deg, color-mix(in srgb, var(--accent) 16%, transparent) 1px, transparent 1px);
-    background-size: 56px 56px;
-    transform: perspective(600px) rotateX(58deg) scale(1.6);
-    transform-origin: top center;
-    opacity: 0.35;
-    mask-image: linear-gradient(to bottom, black, transparent 75%);
-    -webkit-mask-image: linear-gradient(to bottom, black, transparent 75%);
-  }
-  .stage-glow {
-    position: absolute; top: -220px; left: 50%; translate: -50% 0;
-    width: 640px; height: 480px; border-radius: 50%;
-    background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 30%, transparent), transparent);
-    filter: blur(10px);
-  }
-  .stage-inner { position: relative; max-width: 1040px; margin: 0 auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th, td { text-align: left; vertical-align: top; padding: 9px 12px 9px 0; border-bottom: 1px solid var(--rule); }
+  th { font-weight: 600; color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; }
+  td:first-child { white-space: nowrap; font-weight: 600; padding-right: 20px; }
+  tr:last-child td { border-bottom: 0; }
 
-  .eyebrow {
-    font-family: "IBM Plex Mono", monospace; font-size: 12px;
-    letter-spacing: 0.12em; text-transform: uppercase; color: var(--stage-muted);
-    margin-bottom: 18px; display: flex; align-items: center; gap: 10px;
-  }
-  .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--accent); }
+  .row { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--rule); }
+  .row:last-child { border-bottom: 0; }
+  .row .what { font-weight: 600; }
+  .row .detail, .row .when { color: var(--muted); font-size: 15px; }
+  .row .when { white-space: nowrap; }
 
-  h1.name {
-    font-family: "Newsreader", serif;
-    font-size: clamp(40px, 6.4vw, 66px);
-    font-weight: 600; letter-spacing: -0.02em; line-height: 1.04;
-    max-width: 14ch;
-  }
-  .role-line { font-size: 19px; color: var(--stage-muted); font-weight: 400; max-width: 52ch; margin-top: 18px; }
-  .role-line strong { color: var(--stage-ink); font-weight: 600; }
-
-  .hero-cta { display: flex; gap: 12px; margin-top: 34px; flex-wrap: wrap; }
-  .btn-lg { padding: 13px 22px; font-size: 14.5px; border-radius: 9px; }
-  .btn-ghost-dark { background: transparent; color: var(--stage-ink); border: 1px solid var(--stage-rule); }
-  .btn-ghost-dark:hover { border-color: var(--accent); color: var(--accent); }
-
-  /* Floating 3D panels */
-  .float-stack { perspective: 1200px; height: 0; }
-  .float-card {
-    position: absolute;
-    background: color-mix(in srgb, var(--stage-surface) 78%, transparent);
-    border: 1px solid color-mix(in srgb, var(--stage-ink) 12%, transparent);
-    border-radius: 14px;
-    padding: 16px 18px;
-    backdrop-filter: blur(14px);
-    box-shadow: 0 18px 40px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06);
-    transform-style: preserve-3d;
-    will-change: transform;
-    animation: bob 7s ease-in-out infinite;
-  }
-  .float-card .k { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--stage-muted); }
-  .float-card .v { font-family: "Newsreader", serif; font-size: 19px; font-weight: 600; margin-top: 4px; color: var(--stage-ink); }
-  .float-card .v em { color: var(--accent); font-style: normal; }
-
-  .fc-1 { top: -18px; right: 6%; width: 208px; transform: rotateY(-10deg) rotateX(6deg) rotateZ(2deg); animation-delay: 0s; }
-  .fc-2 { top: 118px; right: 22%; width: 178px; transform: rotateY(-6deg) rotateX(4deg) rotateZ(-3deg); animation-delay: 1.4s; }
-  .fc-3 { top: 42px; right: -2%; width: 168px; transform: rotateY(-14deg) rotateX(8deg) rotateZ(4deg); animation-delay: 2.7s; }
-
-  @keyframes bob {
-    0%, 100% { margin-top: 0; }
-    50% { margin-top: -10px; }
-  }
-  @media (max-width: 900px) { .float-card { display: none; } }
-
-  .badges { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 30px; }
-  .badge {
-    display: inline-flex; align-items: center; gap: 7px;
-    padding: 8px 14px; font-size: 12.5px; font-weight: 600;
-    background: color-mix(in srgb, var(--stage-surface) 70%, transparent);
-    color: var(--stage-ink); border: 1px solid var(--stage-rule); border-radius: 999px;
-  }
-  .badge.visa { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
-  .badge svg { width: 13px; height: 13px; }
-
-  .contact-row { display: flex; flex-wrap: wrap; gap: 6px 24px; font-size: 14px; color: var(--stage-muted); margin-top: 26px; }
-  .contact-row a { color: var(--stage-muted); text-decoration: none; display: inline-flex; align-items: center; gap: 7px; }
-  .contact-row a svg { width: 14px; height: 14px; opacity: 0.75; }
-  .contact-row a:hover { color: var(--accent); }
-
-  /* ============ Body ============ */
-  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 28px 100px; }
-  section { padding: 56px 0; border-bottom: 1px solid var(--rule); scroll-margin-top: 76px; }
-  section:last-of-type { border-bottom: none; }
-
-  .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 26px; }
-  .section-head h2 { font-family: "Newsreader", serif; font-size: 27px; font-weight: 600; }
-  .section-head .count { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; color: var(--muted); }
-
-  p.lede { max-width: 66ch; color: var(--muted); font-size: 16.5px; }
-
-  /* ============ Skills ============ */
-  .skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
-  .skill-card {
-    background: var(--surface); border: 1px solid var(--rule); border-radius: 14px;
-    padding: 20px 22px; box-shadow: var(--shadow-sm);
-  }
-  .skill-card h3 {
-    font-family: "IBM Plex Mono", monospace; font-size: 11.5px; text-transform: uppercase;
-    letter-spacing: 0.07em; color: var(--accent); font-weight: 600; margin-bottom: 13px;
-  }
-  .pill-row { display: flex; flex-wrap: wrap; gap: 7px; }
-  .pill { font-size: 13px; padding: 5px 11px; border-radius: 7px; background: var(--surface-2); color: var(--ink); }
-
-  /* ============ Projects ============ */
-  .domain-filter-row {
-    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-    margin-bottom: 22px;
-  }
-  .domain-filter-row label {
-    font-family: "IBM Plex Mono", monospace; font-size: 12px;
-    letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted);
-  }
-  .domain-select {
-    appearance: none; -webkit-appearance: none;
-    font-family: "Work Sans", sans-serif; font-size: 14px; font-weight: 600;
-    color: var(--ink); background: var(--surface);
-    border: 1px solid var(--rule-strong); border-radius: 8px;
-    padding: 9px 36px 9px 14px;
-    cursor: pointer;
-    box-shadow: var(--shadow-sm);
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B606E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-    background-repeat: no-repeat; background-position: right 12px center; background-size: 16px;
-  }
-  .domain-select:hover { border-color: var(--accent); }
-  .domain-select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  .domain-filter-row .domain-count { font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--muted); }
-  .project.domain-hidden { display: none; }
-
-  .project-grid { display: flex; flex-direction: column; }
-  .project {
-    position: relative;
-    background: var(--surface);
-    border: 1px solid var(--rule);
-    border-radius: 16px;
-    padding: 26px 28px;
-    margin-bottom: 18px;
-    box-shadow: var(--shadow-md);
-    transition: box-shadow 0.2s ease, border-color 0.2s ease;
-  }
-  .project:hover { box-shadow: var(--shadow-lg); }
-  .project.featured { border-color: color-mix(in srgb, var(--accent) 45%, var(--rule)); }
-
-  .project-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
-  .project-head h3 { font-family: "Newsreader", serif; font-size: 21px; font-weight: 600; }
-  .project-tag {
-    font-family: "IBM Plex Mono", monospace; font-size: 11.5px; color: var(--muted);
-    padding: 4px 9px; border: 1px solid var(--rule); border-radius: 6px; white-space: nowrap;
-  }
-
-  .project p.desc { color: var(--muted); margin: 10px 0 18px; max-width: 68ch; font-size: 15px; }
-
-  .metric-row {
-    display: flex; flex-wrap: wrap; gap: 30px;
-    margin: 16px 0 20px; padding: 15px 0;
-    border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
-  }
-  .metric { display: flex; flex-direction: column; gap: 3px; }
-  .metric .num { font-family: "IBM Plex Mono", monospace; font-size: 21px; font-weight: 600; color: var(--accent); }
-  .metric .label { font-size: 12px; color: var(--muted); }
-
-  .project-links { display: flex; gap: 12px; flex-wrap: wrap; }
-  .project-links a {
-    text-decoration: none; font-weight: 700; font-size: 13.5px;
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 9px 15px; border-radius: 8px; border: 1px solid var(--rule-strong); color: var(--ink);
-  }
-  .project-links a:hover { border-color: var(--accent); color: var(--accent); }
-  .project-links a.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
-  .project-links a.primary:hover { filter: brightness(1.07); color: var(--accent-ink); }
-  .project-links a svg { width: 13px; height: 13px; }
-
-  /* ============ Case study details (Strategy / PM cards) ============ */
-  .case-details { margin: 4px 0 18px; }
-  .case-details summary {
-    cursor: pointer; font-weight: 700; font-size: 13.5px; color: var(--accent);
-    list-style: none; display: inline-flex; align-items: center; gap: 6px;
-  }
-  .case-details summary::-webkit-details-marker { display: none; }
-  .case-details summary::before {
-    content: "▸"; font-size: 11px; transition: transform 0.15s ease;
-  }
-  .case-details[open] summary::before { transform: rotate(90deg); }
-  .case-body { margin-top: 16px; display: flex; flex-direction: column; gap: 16px; }
-  .case-block h4 {
-    font-family: "IBM Plex Mono", monospace; font-size: 11px; text-transform: uppercase;
-    letter-spacing: 0.06em; color: var(--muted); font-weight: 600; margin-bottom: 6px;
-  }
-  .case-block p { margin: 0; font-size: 14.5px; color: var(--ink); max-width: 66ch; }
-
-  .rice-table-wrap { overflow-x: auto; margin-top: 8px; border: 1px solid var(--rule); border-radius: 10px; }
-  table.rice-table { border-collapse: collapse; width: 100%; min-width: 460px; font-size: 13.5px; }
-  table.rice-table th, table.rice-table td {
-    text-align: left; padding: 9px 13px; border-bottom: 1px solid var(--rule);
-    font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums;
-  }
-  table.rice-table th { background: var(--surface-2); font-weight: 600; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
-  table.rice-table td:first-child, table.rice-table th:first-child { font-family: "Work Sans", sans-serif; font-weight: 500; }
-  table.rice-table tr:last-child td { border-bottom: none; }
-  table.rice-table td.score { color: var(--accent); font-weight: 700; }
-  p.rice-note { font-size: 12.5px; color: var(--muted); margin: 8px 0 0; }
-
-  /* ============ Lens switcher ============ */
-  .lens-switcher { margin-top: 32px; }
-  .lens-label {
-    font-family: "IBM Plex Mono", monospace; font-size: 11.5px; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--stage-muted); margin-bottom: 10px;
-  }
-  .lens-row { display: flex; flex-wrap: wrap; gap: 8px; }
-  .lens-btn {
-    font-family: "Work Sans", sans-serif; font-size: 13px; font-weight: 600;
-    padding: 9px 15px; border-radius: 999px; cursor: pointer;
-    background: transparent; color: var(--stage-muted); border: 1px solid var(--stage-rule);
-    transition: all 0.15s ease;
-  }
-  .lens-btn:hover { color: var(--stage-ink); border-color: var(--rule-strong); }
-  .lens-btn[aria-pressed="true"] {
-    background: var(--accent); color: var(--accent-ink); border-color: var(--accent);
-  }
-
-  .status-live { font-size: 11.5px; font-family: "IBM Plex Mono", monospace; color: var(--accent); display: inline-flex; align-items: center; gap: 6px; font-weight: 600; }
-  .status-live .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); animation: pulse 2.2s ease-in-out infinite; }
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-
-  /* ============ Education / certs ============ */
-  .list-row {
-    display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
-    padding: 16px 0; border-bottom: 1px solid var(--rule);
-  }
-  .list-row:last-child { border-bottom: none; }
-  .list-row .school { font-weight: 700; font-size: 15.5px; }
-  .list-row .degree { color: var(--muted); font-size: 14px; margin-top: 3px; }
-  .list-row .when {
-    font-family: "IBM Plex Mono", monospace; font-size: 12.5px; color: var(--muted);
-    white-space: nowrap; padding: 5px 10px; background: var(--surface-2); border-radius: 7px;
-  }
-  .list-row .tag {
-    font-family: "IBM Plex Mono", monospace; font-size: 11px; padding: 4px 9px;
-    border-radius: 7px; background: var(--accent-soft); color: var(--accent); white-space: nowrap; font-weight: 700;
-  }
-  .list-row .tag.pending { background: var(--surface-2); color: var(--muted); }
-
-  /* ============ Footer ============ */
   footer {
-    padding-top: 30px; display: flex; flex-wrap: wrap; justify-content: space-between;
-    align-items: center; gap: 14px; color: var(--muted); font-size: 13px;
+    max-width: 720px; margin: 0 auto; padding: 24px 16px 48px; color: var(--muted); font-size: 14px;
+    border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px;
   }
-  footer .social { display: flex; gap: 12px; }
-  footer .social a {
-    color: var(--muted); display: inline-flex; align-items: center; justify-content: center;
-    width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--rule-strong);
-  }
-  footer .social a:hover { color: var(--accent); border-color: var(--accent); }
-  footer .social svg { width: 15px; height: 15px; }
 
   @media (max-width: 560px) {
-    .wrap { padding: 0 18px 80px; }
-    .stage { padding: 64px 18px 90px; }
-    .metric-row { gap: 18px; }
-    .project { padding: 22px 20px; }
-    .list-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+    main { padding-top: 40px; }
+    h1 { font-size: 32px; }
+    .role { font-size: 18px; }
+    td:first-child { white-space: normal; }
+    .row { flex-direction: column; gap: 2px; }
   }
 </style>
+</head>
+<body>
+<main>
 
-<div class="topbar">
-  <div class="topbar-inner">
-    <a class="brand" href="#top">
-      <span class="brand-mark"><span class="sq"></span><span class="sq"></span></span>
-      <span class="name">Dinesh Navaneethan</span>
-    </a>
-    <nav class="links">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#education">Education</a>
-      <a href="#certs">Certifications</a>
-    </nav>
-    <div class="cta-row">
-      <a class="btn btn-ghost" href="https://linkedin.com/in/dineshnavaneethan" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn btn-primary" href="mailto:dinesh070704@gmail.com">Email me</a>
-    </div>
-  </div>
-</div>
-
-<div id="top" class="stage">
-  <div class="stage-grid" aria-hidden="true"></div>
-  <div class="stage-glow" aria-hidden="true"></div>
-  <div class="stage-inner">
-    <div class="eyebrow" id="eyebrow">Data &amp; Business Analytics Portfolio</div>
-    <h1 class="name">Dinesh Navaneethan</h1>
-    <div class="role-line" id="role-line">
-      <strong>Data Analyst</strong> — Power BI, SQL &amp; Python — MSc AI with Business
-      Strategy, Aston University. I turn data into decisions people act on.
-    </div>
-
-    <div class="lens-switcher">
-      <div class="lens-label">Flexible for</div>
-      <div class="lens-row" role="group" aria-label="Choose how to view this portfolio">
-        <button class="lens-btn" type="button" data-lens="analyst" aria-pressed="true">Data Analyst</button>
-        <button class="lens-btn" type="button" data-lens="engineer" aria-pressed="false">Data Engineer</button>
-        <button class="lens-btn" type="button" data-lens="strategy" aria-pressed="false">Business Strategy</button>
-        <button class="lens-btn" type="button" data-lens="product" aria-pressed="false">Product</button>
-      </div>
-    </div>
-
-    <div class="badges">
-      <span class="badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg>
-        BCA Data Science, Vels University
-      </span>
-      <span class="badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg>
-        MSc AI with Business Strategy, Aston University
-      </span>
-      <span class="badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Birmingham, UK · open to relocation
-      </span>
-      <span class="badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-        Available immediately
-      </span>
-    </div>
-
-    <div class="contact-row">
-      <a href="mailto:dinesh070704@gmail.com">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
-        dinesh070704@gmail.com
-      </a>
-      <a href="https://linkedin.com/in/dineshnavaneethan" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        linkedin.com/in/dineshnavaneethan
-      </a>
-      <a href="https://github.com/Dinesh-0707" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
-        github.com/Dinesh-0707
-      </a>
-    </div>
-
-    <div class="float-stack">
-      <div class="float-card fc-1">
-        <div class="k">Live Projects</div>
-        <div class="v"><em>5</em> deployed apps</div>
-      </div>
-      <div class="float-card fc-2">
-        <div class="k">AI Toolkit</div>
-        <div class="v">LLM Agents · <em>NLP</em> · GenAI</div>
-      </div>
-      <div class="float-card fc-3">
-        <div class="k">Core Stack</div>
-        <div class="v" id="core-stack">SQL · <em>Power BI</em> · Python</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="wrap">
-
-  <section id="about">
-    <div class="section-head"><h2>About</h2></div>
-    <p class="lede">
-      I like finding the story hiding in a messy dataset — and then figuring out what to
-      actually do about it. Most of my work sits somewhere between SQL and a strategy
-      conversation: cleaning and modelling data, building the Power BI or Tableau view
-      that makes it click, and reaching for AI or NLP when it genuinely helps rather than
-      because it's trendy. A first-class degree in Data Science and a master's in AI with
-      Business Strategy probably explain why I can't look at a chart without also asking
-      what it means for the business. Curious by default, a little stubborn about getting
-      the details right, and happiest when something I've built actually gets used.
+  <header>
+    <h1>Dinesh Navaneethan</h1>
+    <p class="role">Junior Data Engineer</p>
+    <p class="intro">
+      I build data pipelines in Python and SQL: pulling data from APIs, loading it
+      reliably into a database, testing it, and modelling it into something people
+      can make decisions with. MSc in AI with Business Strategy from Aston University.
     </p>
+    <p class="meta">Birmingham, UK · open to relocation · available now</p>
+    <ul class="links">
+      <li><a href="mailto:dinesh070704@gmail.com">dinesh070704@gmail.com</a></li>
+      <li><a href="https://linkedin.com/in/dineshnavaneethan">LinkedIn</a></li>
+      <li><a href="https://github.com/Dinesh-0707">GitHub</a></li>
+    </ul>
+  </header>
+
+  <section id="projects">
+    <h2>Selected projects</h2>
+
+    <article class="project" id="energy">
+      <h3>UK Energy Price &amp; Carbon Tracker</h3>
+      <p>
+        When is electricity cheapest and cleanest, and how much does it save to use it
+        then? A pipeline that collects a year of half-hourly prices and carbon
+        intensity for London and answers that in SQL.
+      </p>
+      <figure>
+        <a href="https://github.com/Dinesh-0707/energy_tracker"><img src="assets/img/energy-dashboard.png" width="1532" height="1035" loading="lazy" alt="Dashboard: smart EV charging saves £843 a year (64%) and 273 kg of CO2; price and carbon by hour of day peak at 4 to 7pm; windier days have lower carbon; monthly EV cost by charging strategy."></a>
+        <figcaption>Dashboard generated from the pipeline's data, Nov 2025 to Oct 2026.</figcaption>
+      </figure>
+      <ul>
+        <li>Ingests two public APIs (Octopus Agile prices, National Grid carbon intensity) with retries, saving each day's raw response before loading.</li>
+        <li>Loads 17,568 half-hourly periods into PostgreSQL with primary keys and upserts, so re-running a day never creates duplicates.</li>
+        <li>A completeness check found one missing half hour, traced to an API quirk at the year boundary. Fixing the loader brought coverage to 100%.</li>
+        <li>Result: charging an EV in each day's cheapest hours instead of at 6pm costs 64% less, about £843 a year, and avoids 273 kg of CO2.</li>
+      </ul>
+      <p class="stack">Python · PostgreSQL · SQL · Docker · pandas · matplotlib</p>
+      <div class="project-links">
+        <a href="https://github.com/Dinesh-0707/energy_tracker">Code and write-up</a>
+      </div>
+    </article>
+
+    <article class="project" id="stock">
+      <h3>Stock Market Data Pipeline</h3>
+      <p>
+        A batch pipeline for daily stock prices, built to practise the tools data teams
+        use: Airflow for scheduling, a Bronze/Silver/Gold layout, Delta Lake and dbt.
+      </p>
+      <ul>
+        <li>Five-task Airflow DAG in Docker: ingest, clean and validate, aggregate, merge into Delta Lake, then run dbt models and tests on DuckDB. A full run takes about 80 seconds.</li>
+        <li>Found that 75% of the rows being read were duplicates from overlapping daily snapshots, which had made 93% of weekly return figures wrong. Fixed with run-date loads and Delta Lake MERGE.</li>
+        <li>10 dbt data tests, including one row per stock per day, so the duplicate problem can't come back unnoticed.</li>
+        <li>A separate demo app shows the reporting layer with a plain-English question box that turns questions into SQL.</li>
+      </ul>
+      <p class="stack">Python · Apache Airflow · dbt · Delta Lake · DuckDB · Docker</p>
+      <div class="project-links">
+        <a href="https://github.com/Dinesh-0707/stock-data-pipeline">Code</a>
+        <a href="https://stock-nl-sql-demo-dwy26ueqy4gb3ybcbdohuk.streamlit.app/">Live demo</a>
+      </div>
+    </article>
+
+    <article class="project" id="house-prices">
+      <h3>UK Regional House Price Monitor</h3>
+      <p>
+        Which UK regions are heating up or cooling down? Monthly house price data for
+        8 regions from HM Land Registry, kept in a small warehouse and shown in a
+        dashboard.
+      </p>
+      <ul>
+        <li>Extracts three years of monthly figures from the UK House Price Index API, then cleans and deduplicates them into SQLite.</li>
+        <li>Dashboard shows regional trends, year-on-year change and prices by property type.</li>
+      </ul>
+      <p class="stack">Python · SQLite · pandas · Streamlit</p>
+      <div class="project-links">
+        <a href="https://github.com/Dinesh-0707/uk-house-price-dashboard">Code</a>
+        <a href="https://uk-house-price-dashboard-3kxstxtkpbp5hqpsdbglyf.streamlit.app/">Live demo</a>
+      </div>
+    </article>
+
+    <article class="project" id="crime">
+      <h3>UK City Crime Trends &amp; Forecast</h3>
+      <p>
+        Reported crime across 5 UK cities from the Police API, with a breakdown by
+        category, a city comparison and a 3-month forecast.
+      </p>
+      <ul>
+        <li>Same pattern as the house price monitor (API to SQL warehouse to app), applied to a different domain.</li>
+        <li>Forecasts each city with Holt's linear trend exponential smoothing.</li>
+      </ul>
+      <p class="stack">Python · SQLite · statsmodels · Streamlit</p>
+      <div class="project-links">
+        <a href="https://github.com/Dinesh-0707/uk-crime-trends-forecast">Code</a>
+        <a href="https://uk-crime-trends-forecast-2km7uvnzwmqwdkwnj6xu4s.streamlit.app/">Live demo</a>
+      </div>
+    </article>
+  </section>
+
+  <section id="other">
+    <h2>Other work</h2>
+    <ul class="other">
+      <li>
+        <strong><a href="https://github.com/Dinesh-0707/voice-comparison">Forensic voice comparison</a></strong> (MSc dissertation)
+        <span>Speaker verification with SpeechBrain embeddings and cosine similarity on LibriSpeech clips. <a href="https://voice-comparison-gafkqkg4wzbdsahpvj6x3v.streamlit.app/">Demo</a></span>
+      </li>
+      <li>
+        <strong><a href="https://github.com/Dinesh-0707/law-firm-intake">Intake</a></strong>, AI enquiry assistant for small law firms
+        <span>A Gemini agent with tool calls that checks conflicts against a Postgres database and drafts replies for a solicitor to approve. <a href="https://law-firm-intake-sage.vercel.app/">Demo</a></span>
+      </li>
+      <li>
+        <strong><a href="https://github.com/Dinesh-0707/british-airways-data-science-forage">British Airways data science</a></strong>, Forage job simulation
+        <span>Review sentiment analysis and a booking prediction model on 50,000 customer records (ROC-AUC 0.765).</span>
+      </li>
+      <li>
+        <strong><a href="https://github.com/Dinesh-0707/Quantium-data-analytics-forage">Quantium retail analytics</a></strong>, Forage job simulation
+        <span>Customer segmentation and a trial-store test showing a statistically significant sales uplift.</span>
+      </li>
+    </ul>
   </section>
 
   <section id="skills">
-    <div class="section-head"><h2>Skills</h2></div>
-    <div class="skill-grid">
-      <div class="skill-card" id="skill-analytics">
-        <h3>Data &amp; Analytics</h3>
-        <div class="pill-row">
-          <span class="pill">SQL</span><span class="pill">Power BI / DAX</span>
-          <span class="pill">Tableau</span><span class="pill">Python / pandas</span>
-          <span class="pill">R</span><span class="pill">Excel</span>
-        </div>
-      </div>
-      <div class="skill-card" id="skill-ai">
-        <h3>AI &amp; Machine Learning</h3>
-        <div class="pill-row">
-          <span class="pill">AI Agents / Function-Calling</span><span class="pill">NLP / Sentiment Analysis</span>
-          <span class="pill">LLM Integration</span><span class="pill">Prompt Engineering</span>
-          <span class="pill">Predictive Modeling</span><span class="pill">scikit-learn</span>
-          <span class="pill">Generative AI</span>
-        </div>
-      </div>
-      <div class="skill-card" id="skill-engineering">
-        <h3>Data Engineering</h3>
-        <div class="pill-row">
-          <span class="pill">Apache Airflow</span><span class="pill">dbt</span>
-          <span class="pill">Delta Lake</span><span class="pill">PostgreSQL</span>
-          <span class="pill">Docker</span><span class="pill">ETL</span>
-          <span class="pill">DuckDB</span><span class="pill">Data quality testing</span>
-        </div>
-      </div>
-      <div class="skill-card" id="skill-strategy">
-        <h3>Business &amp; Strategy</h3>
-        <div class="pill-row">
-          <span class="pill">Requirements gathering</span><span class="pill">BPMN</span>
-          <span class="pill">SWOT / PESTLE</span><span class="pill">Porter's Five Forces</span>
-          <span class="pill">Stakeholder mgmt</span>
-        </div>
-      </div>
-      <div class="skill-card" id="skill-delivery">
-        <h3>Delivery</h3>
-        <div class="pill-row">
-          <span class="pill">Agile / Scrum</span><span class="pill">Sprint planning</span>
-          <span class="pill">Data storytelling</span><span class="pill">Client comms</span>
-          <span class="pill">Prioritization (RICE)</span><span class="pill">Git / GitHub</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="projects">
-    <div class="section-head">
-      <h2>Projects &amp; Case Studies</h2>
-      <span class="count" id="project-count">9 total</span>
-    </div>
-    <p class="lede" style="margin-bottom: 18px;">
-      Viewing as <strong id="lens-label">Data Analyst</strong> — the lens above changes which
-      of these lead. Everything stays visible either way. Live demos run on free hosting, so
-      one that has been idle may take about 30 seconds to wake up.
-    </p>
-
-    <div class="domain-filter-row">
-      <label for="domain-select">Filter by domain</label>
-      <select class="domain-select" id="domain-select">
-        <option value="all">All domains</option>
-        <option value="ai">AI &amp; Agents</option>
-        <option value="engineering">Data Engineering</option>
-        <option value="analytics">Data &amp; Analytics</option>
-        <option value="strategy">Business &amp; Strategy</option>
-      </select>
-      <span class="domain-count" id="domain-count">9 of 9 shown</span>
-    </div>
-
-    <div class="project-grid">
-      <div class="project featured" id="proj-voice" data-domain="ai">
-        <div class="project-head">
-          <h3>Longitudinal Forensic Voice Comparison System</h3>
-          <span class="status-live"><span class="dot"></span>live</span>
-        </div>
-        <p class="desc">
-          MSc dissertation — a speaker verification system using SpeechBrain's ECAPA-TDNN
-          model to convert audio into speaker embeddings, compared with cosine similarity
-          to decide whether two clips are the same speaker, with the decision threshold chosen
-          by sweeping for the best cut-off on LibriSpeech clips (6 speakers × 4 clips).
-        </p>
-        <div class="metric-row">
-          <div class="metric"><span class="num mono">98.2%</span><span class="label">accuracy (threshold tuned on the same pairs)</span></div>
-          <div class="metric"><span class="num mono">276</span><span class="label">pairwise comparisons</span></div>
-          <div class="metric"><span class="num mono">192-d</span><span class="label">speaker embeddings</span></div>
-        </div>
-        <div class="project-links">
-          <a class="primary" href="https://voice-comparison-gafkqkg4wzbdsahpvj6x3v.streamlit.app/" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
-            Live dashboard
-          </a>
-          <a href="https://github.com/Dinesh-0707/voice-comparison" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
-            View code
-          </a>
-        </div>
-      </div>
-
-      <div class="project featured" id="proj-intake" data-domain="ai engineering">
-        <div class="project-head">
-          <h3>Intake — AI Intake Automation for Small Law Firms</h3>
-          <span class="status-live"><span class="dot"></span>live</span>
-        </div>
-        <p class="desc">
-          A working AI intake agent for small law firms: a Gemini agent with function-calling
-          tools that qualifies enquiries, runs a live conflict check against a real Postgres
-          database, opens a matter file, and drafts a first response — live over web chat or
-          Twilio voice, with a real Clio OAuth sync and an authenticated solicitor review
-          queue holding every draft for human sign-off before it goes out.
-        </p>
-        <div class="metric-row">
-          <div class="metric"><span class="num mono">live</span><span class="label">Gemini agent, function-calling</span></div>
-          <div class="metric"><span class="num mono">real</span><span class="label">DB + Clio + Twilio integration</span></div>
-        </div>
-        <div class="project-links">
-          <a class="primary" href="https://law-firm-intake-sage.vercel.app/" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
-            Live demo
-          </a>
-          <a href="https://github.com/Dinesh-0707/law-firm-intake" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
-            View code
-          </a>
-        </div>
-      </div>
-
-      <div class="project featured" id="proj-house-price" data-domain="analytics">
-        <div class="project-head">
-          <h3>UK Regional House Price Monitor</h3>
-          <span class="status-live"><span class="dot"></span>live</span>
-        </div>
-        <p class="desc">
-          End-to-end Python pipeline pulling live data from HM Land Registry's public
-          UK House Price Index API, cleaned into a SQLite warehouse, served through an
-          interactive Streamlit dashboard tracking regional price trends and affordability
-          by property type.
-        </p>
-        <div class="metric-row">
-          <div class="metric"><span class="num mono">8</span><span class="label">UK regions tracked</span></div>
-          <div class="metric"><span class="num mono">3yr</span><span class="label">monthly history</span></div>
-          <div class="metric"><span class="num mono">live</span><span class="label">API-sourced, not static CSV</span></div>
-        </div>
-        <div class="project-links">
-          <a class="primary" href="https://uk-house-price-dashboard-3kxstxtkpbp5hqpsdbglyf.streamlit.app/" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
-            Live dashboard
-          </a>
-          <a href="https://github.com/Dinesh-0707/uk-house-price-dashboard" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
-            View code
-          </a>
-        </div>
-      </div>
-
-      <div class="project featured" id="proj-crime" data-domain="analytics">
-        <div class="project-head">
-          <h3>UK City Crime Trends &amp; Forecast</h3>
-          <span class="status-live"><span class="dot"></span>live</span>
-        </div>
-        <p class="desc">
-          Multi-page Python app tracking reported crime volume across 5 UK cities from
-          the live UK Police API, with a category breakdown, year-on-year city comparison,
-          and a 3-month forecast per city using Holt's linear trend exponential smoothing.
-        </p>
-        <div class="metric-row">
-          <div class="metric"><span class="num mono">5</span><span class="label">UK cities tracked</span></div>
-          <div class="metric"><span class="num mono">4</span><span class="label">app pages</span></div>
-          <div class="metric"><span class="num mono">3mo</span><span class="label">statistical forecast</span></div>
-        </div>
-        <div class="project-links">
-          <a class="primary" href="https://uk-crime-trends-forecast-2km7uvnzwmqwdkwnj6xu4s.streamlit.app/" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
-            Live dashboard
-          </a>
-          <a href="https://github.com/Dinesh-0707/uk-crime-trends-forecast" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
-            View code
-          </a>
-        </div>
-      </div>
-
-      <div class="project featured" id="proj-stock-pipeline" data-domain="engineering ai">
-        <div class="project-head">
-          <h3>Stock Market Data Pipeline &amp; NL-to-SQL</h3>
-          <span class="status-live"><span class="dot"></span>live</span>
-        </div>
-        <p class="desc">
-          End-to-end Bronze/Silver/Gold pipeline orchestrated with Airflow in Docker, with
-          Delta Lake MERGE upserts and dbt models on DuckDB feeding Power BI dashboards and a
-          natural-language-to-SQL interface. Found and fixed a duplicate-snapshot bug that had
-          made most weekly return figures wrong, and added idempotent run-date loads.
-          The live demo below is a freely-hostable companion running the same staging → marts
-          SQL pattern and NL-to-SQL query box on live market data.
-        </p>
-        <div class="metric-row">
-          <div class="metric"><span class="num mono">75%</span><span class="label">duplicate rows found and removed</span></div>
-          <div class="metric"><span class="num mono">10</span><span class="label">automated dbt data tests</span></div>
-          <div class="metric"><span class="num mono">~80s</span><span class="label">full Airflow run, 5 tasks</span></div>
-        </div>
-        <div class="project-links">
-          <a class="primary" href="https://stock-nl-sql-demo-dwy26ueqy4gb3ybcbdohuk.streamlit.app/" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
-            Live NL-to-SQL demo
-          </a>
-          <a href="https://github.com/Dinesh-0707/stock-data-pipeline" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
-            Full pipeline code
-          </a>
-        </div>
-      </div>
-
-      <div class="project" id="proj-energy" data-domain="engineering analytics">
-        <div class="project-head">
-          <h3>UK Energy Price &amp; Carbon Tracker</h3>
-          <span class="project-tag">Data Pipeline</span>
-        </div>
-        <p class="desc">
-          Python pipeline collecting a year of half-hourly Octopus Agile electricity prices and
-          National Grid carbon intensity for London from two public APIs into PostgreSQL
-          (Docker), with retries and idempotent upserts. SQL analysis shows that charging an EV
-          in each day's cheapest hours instead of at 6pm costs 64% less and avoids 273 kg of
-          CO2 a year; a completeness check found and fixed a gap caused by an API quirk.
-        </p>
-        <div class="metric-row">
-          <div class="metric"><span class="num mono">&pound;843</span><span class="label">a year saved by smart EV charging</span></div>
-          <div class="metric"><span class="num mono">17,568</span><span class="label">half-hourly periods, 100% complete</span></div>
-          <div class="metric"><span class="num mono">53%</span><span class="label">cheaper overnight than the 4&ndash;7pm peak</span></div>
-        </div>
-        <div class="project-links">
-          <a class="primary" href="https://github.com/Dinesh-0707/energy_tracker#readme" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
-            Findings &amp; dashboard
-          </a>
-          <a href="https://github.com/Dinesh-0707/energy_tracker" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
-            View code
-          </a>
-        </div>
-      </div>
-
-      <div class="project" id="proj-ba" data-domain="analytics">
-        <div class="project-head">
-          <h3>British Airways Customer Sentiment &amp; Booking Analytics</h3>
-          <span class="project-tag">Forage Job Simulation</span>
-        </div>
-        <p class="desc">
-          NLP sentiment analysis on customer reviews to surface operational pain points, plus
-          a Random Forest model predicting booking completion from 50,000 customer records —
-          10 engineered features, 5-fold stratified cross-validation, translated into a
-          geo-targeted marketing recommendation.
-        </p>
-        <div class="metric-row">
-          <div class="metric"><span class="num mono">0.765</span><span class="label">ROC-AUC</span></div>
-          <div class="metric"><span class="num mono">50k</span><span class="label">customer records</span></div>
-          <div class="metric"><span class="num mono">10</span><span class="label">engineered features</span></div>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/Dinesh-0707/british-airways-data-science-forage" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
-            View code
-          </a>
-        </div>
-      </div>
-
-      <div class="project" id="proj-quantium" data-domain="analytics">
-        <div class="project-head">
-          <h3>Quantium Retail Customer Insights &amp; Sales Analytics</h3>
-          <span class="project-tag">Forage Job Simulation</span>
-        </div>
-        <p class="desc">
-          Customer segmentation across retail transaction data, plus a control-store
-          experiment design (Pearson correlation + magnitude matching) to test whether a
-          new store layout drove a statistically significant sales uplift — delivered as a
-          client-ready Pyramid Principle presentation.
-        </p>
-        <div class="metric-row">
-          <div class="metric"><span class="num mono">p&lt;0.05</span><span class="label">uplift significance</span></div>
-          <div class="metric"><span class="num mono">3</span><span class="label">trial stores tested</span></div>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/Dinesh-0707/Quantium-data-analytics-forage" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
-            View code
-          </a>
-        </div>
-      </div>
-
-      <div class="project featured" id="proj-pm" data-domain="strategy">
-        <div class="project-head">
-          <h3>Prioritizing the Crime Trends Dashboard Roadmap</h3>
-          <span class="project-tag">Personal Case Study</span>
-        </div>
-        <p class="desc">
-          A self-directed product exercise: applying RICE prioritization to a real,
-          live product — the <a href="#proj-crime">UK City Crime Trends &amp; Forecast</a>
-          dashboard above — to decide what it should build next and why. Framed as a
-          product decision, not just an engineering backlog.
-        </p>
-        <details class="case-details">
-          <summary>Read the product case study</summary>
-          <div class="case-body">
-            <div class="case-block">
-              <h4>Problem</h4>
-              <p>The dashboard shows city-level trends well, but a local-authority or
-              insurance analyst — its most likely real user — needs finer resolution and
-              a way to act on what they see, not just view it.</p>
-            </div>
-            <div class="case-block">
-              <h4>Candidate features, scored with RICE</h4>
-              <div class="rice-table-wrap">
-                <table class="rice-table">
-                  <thead>
-                    <tr><th>Feature</th><th>Reach</th><th>Impact</th><th>Confidence</th><th>Effort</th><th>Score</th></tr>
-                  </thead>
-                  <tbody>
-                    <tr><td>Postcode-level drill-down</td><td>8</td><td>9</td><td>7</td><td>5</td><td class="score">100.8</td></tr>
-                    <tr><td>Threshold alerting per city</td><td>4</td><td>9</td><td>5</td><td>8</td><td class="score">22.5</td></tr>
-                    <tr><td>CSV / forecast export</td><td>6</td><td>5</td><td>9</td><td>2</td><td class="score">135.0</td></tr>
-                    <tr><td>Custom date-range comparison</td><td>5</td><td>5</td><td>7</td><td>4</td><td class="score">43.8</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <p class="rice-note">Reach/Impact/Confidence scored 1–10, Effort in person-days. Score = (R × I × C) / E.</p>
-            </div>
-            <div class="case-block">
-              <h4>Resulting 1-quarter roadmap</h4>
-              <p><strong>Now:</strong> CSV/forecast export (highest score, lowest effort — ships first).
-              <strong>Next:</strong> Postcode-level drill-down (highest reach × impact, worth the extra effort).
-              <strong>Later:</strong> Custom date-range comparison, then threshold alerting once usage data
-              justifies the build cost.</p>
-            </div>
-          </div>
-        </details>
-        <div class="project-links">
-          <a class="primary" href="https://uk-crime-trends-forecast-2km7uvnzwmqwdkwnj6xu4s.streamlit.app/" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
-            See the live product
-          </a>
-        </div>
-      </div>
-    </div>
+    <h2>Skills, and where I've used them</h2>
+    <table>
+      <thead><tr><th>Skill</th><th>Used in</th></tr></thead>
+      <tbody>
+        <tr><td>Python</td><td>All projects: API ingestion, pandas, loading scripts</td></tr>
+        <tr><td>SQL</td><td>Energy tracker analysis (CTEs, window functions), dbt models, warehouse queries</td></tr>
+        <tr><td>PostgreSQL</td><td>Energy tracker (in Docker), Intake</td></tr>
+        <tr><td>Apache Airflow</td><td>Stock pipeline</td></tr>
+        <tr><td>dbt</td><td>Stock pipeline: staging and mart models, 10 tests</td></tr>
+        <tr><td>Delta Lake, DuckDB</td><td>Stock pipeline</td></tr>
+        <tr><td>Docker</td><td>Stock pipeline (Airflow), energy tracker (PostgreSQL)</td></tr>
+        <tr><td>Data quality</td><td>Validation checks, dbt tests, completeness checks</td></tr>
+        <tr><td>Dashboards</td><td>Streamlit, Power BI, matplotlib</td></tr>
+        <tr><td>Git and GitHub</td><td>All projects, plus GitHub Actions for a scheduled job</td></tr>
+      </tbody>
+    </table>
   </section>
 
   <section id="education">
-    <div class="section-head"><h2>Education</h2></div>
-    <div class="list-row">
+    <h2>Education</h2>
+    <div class="row">
       <div>
-        <div class="school">Aston University, Birmingham</div>
-        <div class="degree">MSc Artificial Intelligence with Business Strategy</div>
+        <div class="what">MSc Artificial Intelligence with Business Strategy</div>
+        <div class="detail">Aston University, Birmingham</div>
       </div>
-      <div class="when">2024–2026</div>
+      <div class="when">2024 to 2026</div>
     </div>
-    <div class="list-row">
+    <div class="row">
       <div>
-        <div class="school">Vels University, Chennai</div>
-        <div class="degree">BCA Data Science — First Class with Distinction, CGPA 8.04/10</div>
+        <div class="what">BCA Data Science, First Class with Distinction (CGPA 8.04/10)</div>
+        <div class="detail">Vels University, Chennai</div>
       </div>
-      <div class="when">2021–2024</div>
+      <div class="when">2021 to 2024</div>
     </div>
   </section>
 
-  <section id="certs">
-    <div class="section-head"><h2>Certifications</h2></div>
-    <div class="list-row">
+  <section id="certifications">
+    <h2>Certifications</h2>
+    <div class="row">
       <div>
-        <div class="school">
-          <a href="assets/certs/niit-certified-data-analyst.jpg" target="_blank" rel="noopener">
-            Certified Data Analyst Professional
-          </a>
-        </div>
-        <div class="degree">NIIT, powered by StackRoute</div>
+        <div class="what"><a href="assets/certs/niit-certified-data-analyst.jpg">Certified Data Analyst Professional</a></div>
+        <div class="detail">NIIT, powered by StackRoute</div>
       </div>
-      <span class="tag">Completed</span>
     </div>
-    <div class="list-row">
+    <div class="row">
       <div>
-        <div class="school">Generative AI &amp; Applications</div>
-        <div class="degree">Udemy</div>
+        <div class="what"><a href="https://www.theforage.com/completion-certificates/tMjbs76F526fF5v3G/NjynCWzGSaWXQCxSX_tMjbs76F526fF5v3G_38gAxsPFbDfLFbGdg_1775992315651_completion_certificate.pdf">Data Science Job Simulation, British Airways</a></div>
+        <div class="detail">Forage</div>
       </div>
-      <span class="tag">Completed</span>
     </div>
-    <div class="list-row">
+    <div class="row">
       <div>
-        <div class="school">ChatGPT &amp; AI Automation Tools</div>
-        <div class="degree">Skill Nation — prompt engineering &amp; workflow automation</div>
+        <div class="what"><a href="https://www.theforage.com/completion-certificates/32A6DqtsbF7LbKdcq/NkaC7knWtjSbi6aYv_32A6DqtsbF7LbKdcq_38gAxsPFbDfLFbGdg_1775896611767_completion_certificate.pdf">Data Analytics Job Simulation, Quantium</a></div>
+        <div class="detail">Forage</div>
       </div>
-      <span class="tag">Completed</span>
-    </div>
-    <div class="list-row">
-      <div>
-        <div class="school">PL-300: Power BI Data Analyst Associate</div>
-        <div class="degree">Microsoft</div>
-      </div>
-      <span class="tag pending">In progress</span>
-    </div>
-    <div class="list-row">
-      <div>
-        <div class="school">
-          <a href="https://www.theforage.com/completion-certificates/32A6DqtsbF7LbKdcq/NkaC7knWtjSbi6aYv_32A6DqtsbF7LbKdcq_38gAxsPFbDfLFbGdg_1775896611767_completion_certificate.pdf" target="_blank" rel="noopener">
-            Data Analytics Job Simulation — Quantium
-          </a>
-        </div>
-        <div class="degree">Forage</div>
-      </div>
-      <span class="tag">Completed</span>
-    </div>
-    <div class="list-row">
-      <div>
-        <div class="school">
-          <a href="https://www.theforage.com/completion-certificates/tMjbs76F526fF5v3G/NjynCWzGSaWXQCxSX_tMjbs76F526fF5v3G_38gAxsPFbDfLFbGdg_1775992315651_completion_certificate.pdf" target="_blank" rel="noopener">
-            Data Science Job Simulation — British Airways
-          </a>
-        </div>
-        <div class="degree">Forage</div>
-      </div>
-      <span class="tag">Completed</span>
     </div>
   </section>
 
-  <footer>
-    <span>Birmingham, UK · updated August 2026</span>
-    <div class="social">
-      <a href="mailto:dinesh070704@gmail.com" aria-label="Email" title="Email">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
-      </a>
-      <a href="https://linkedin.com/in/dineshnavaneethan" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-      </a>
-      <a href="https://github.com/Dinesh-0707" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
-      </a>
-    </div>
-  </footer>
+  <p class="note">
+    The live demos run on free hosting, so one that hasn't been used for a while can
+    take up to a minute to start.
+  </p>
 
-</div>
-
-<script>
-(function () {
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // Hero floating cards: subtle mouse parallax
-  var stage = document.querySelector('.stage');
-  var floatCards = document.querySelectorAll('.float-card');
-  if (stage && floatCards.length && !reduceMotion) {
-    stage.addEventListener('mousemove', function (e) {
-      var rect = stage.getBoundingClientRect();
-      var px = (e.clientX - rect.left) / rect.width - 0.5;
-      var py = (e.clientY - rect.top) / rect.height - 0.5;
-      floatCards.forEach(function (card, i) {
-        var depth = (i + 1) * 6;
-        card.style.setProperty('--mx', (px * depth) + 'px');
-        card.style.setProperty('--my', (py * depth) + 'px');
-        card.style.translate = (px * depth) + 'px ' + (py * depth) + 'px';
-      });
-    });
-    stage.addEventListener('mouseleave', function () {
-      floatCards.forEach(function (card) { card.style.translate = '0 0'; });
-    });
-  }
-
-})();
-
-(function () {
-  var lensConfig = {
-    analyst: {
-      eyebrow: 'Data &amp; Business Analytics Portfolio',
-      roleHTML: '<strong>Data Analyst</strong> — Power BI, SQL &amp; Python — MSc AI with Business Strategy, Aston University. I turn data into decisions people act on.',
-      coreStack: 'SQL · <em>Power BI</em> · Python',
-      label: 'Data Analyst',
-      projects: {
-        'proj-voice': { order: 0, featured: true },
-        'proj-house-price': { order: 1, featured: true },
-        'proj-crime': { order: 2, featured: true },
-        'proj-energy': { order: 3, featured: false },
-        'proj-stock-pipeline': { order: 4, featured: false },
-        'proj-intake': { order: 5, featured: false },
-        'proj-ba': { order: 6, featured: false },
-        'proj-quantium': { order: 7, featured: false },
-        'proj-pm': { order: 8, featured: false }
-      },
-      skills: { 'skill-analytics': 0, 'skill-ai': 1, 'skill-strategy': 2, 'skill-delivery': 3, 'skill-engineering': 4 }
-    },
-    engineer: {
-      eyebrow: 'Data Engineering Portfolio',
-      roleHTML: '<strong>Data Engineer</strong> — Python, SQL &amp; Pipelines (Airflow, dbt) — MSc AI with Business Strategy, Aston University. I build the pipelines analytics runs on.',
-      coreStack: 'Airflow · <em>dbt</em> · Python',
-      label: 'Data Engineer',
-      projects: {
-        'proj-stock-pipeline': { order: 0, featured: true },
-        'proj-energy': { order: 1, featured: true },
-        'proj-voice': { order: 2, featured: true },
-        'proj-house-price': { order: 3, featured: true },
-        'proj-crime': { order: 4, featured: false },
-        'proj-intake': { order: 5, featured: false },
-        'proj-pm': { order: 6, featured: false },
-        'proj-ba': { order: 7, featured: false },
-        'proj-quantium': { order: 8, featured: false }
-      },
-      skills: { 'skill-engineering': 0, 'skill-analytics': 1, 'skill-ai': 2, 'skill-delivery': 3, 'skill-strategy': 4 }
-    },
-    strategy: {
-      eyebrow: 'Business Strategy &amp; Analytics Portfolio',
-      roleHTML: '<strong>Business Strategy &amp; Analytics</strong> — MSc AI with Business Strategy, Aston University. I turn market analysis into a recommendation leadership can act on.',
-      coreStack: 'SWOT · <em>PESTLE</em> · Porter’s',
-      label: 'Business Strategy',
-      projects: {
-        'proj-pm': { order: 0, featured: true },
-        'proj-intake': { order: 1, featured: true },
-        'proj-stock-pipeline': { order: 2, featured: true },
-        'proj-energy': { order: 3, featured: false },
-        'proj-house-price': { order: 4, featured: false },
-        'proj-crime': { order: 5, featured: false },
-        'proj-voice': { order: 6, featured: false },
-        'proj-ba': { order: 7, featured: false },
-        'proj-quantium': { order: 8, featured: false }
-      },
-      skills: { 'skill-strategy': 0, 'skill-delivery': 1, 'skill-analytics': 2, 'skill-ai': 3, 'skill-engineering': 4 }
-    },
-    product: {
-      eyebrow: 'Product-Minded Analyst Portfolio',
-      roleHTML: '<strong>Product-Minded Analyst</strong> — Data → Product Decisions — MSc AI with Business Strategy, Aston University. I turn user and data signals into a prioritized roadmap.',
-      coreStack: 'RICE · <em>Roadmaps</em> · SQL',
-      label: 'Product',
-      projects: {
-        'proj-pm': { order: 0, featured: true },
-        'proj-intake': { order: 1, featured: true },
-        'proj-crime': { order: 2, featured: true },
-        'proj-house-price': { order: 3, featured: false },
-        'proj-energy': { order: 4, featured: false },
-        'proj-stock-pipeline': { order: 5, featured: false },
-        'proj-voice': { order: 6, featured: false },
-        'proj-ba': { order: 7, featured: false },
-        'proj-quantium': { order: 8, featured: false }
-      },
-      skills: { 'skill-delivery': 0, 'skill-analytics': 1, 'skill-ai': 2, 'skill-strategy': 3, 'skill-engineering': 4 }
-    }
-  };
-
-  function applyLens(lensId) {
-    var cfg = lensConfig[lensId];
-    if (!cfg) return;
-
-    var eyebrowEl = document.getElementById('eyebrow');
-    var roleEl = document.getElementById('role-line');
-    var coreStackEl = document.getElementById('core-stack');
-    var lensLabelEl = document.getElementById('lens-label');
-    if (eyebrowEl) eyebrowEl.innerHTML = cfg.eyebrow;
-    if (roleEl) roleEl.innerHTML = cfg.roleHTML;
-    if (coreStackEl) coreStackEl.innerHTML = cfg.coreStack;
-    if (lensLabelEl) lensLabelEl.textContent = cfg.label;
-
-    Object.keys(cfg.projects).forEach(function (id) {
-      var el = document.getElementById(id);
-      if (!el) return;
-      var p = cfg.projects[id];
-      el.style.order = p.order;
-      el.classList.toggle('featured', !!p.featured);
-    });
-
-    Object.keys(cfg.skills).forEach(function (id) {
-      var el = document.getElementById(id);
-      if (el) el.style.order = cfg.skills[id];
-    });
-
-    document.querySelectorAll('.lens-btn').forEach(function (btn) {
-      var active = btn.getAttribute('data-lens') === lensId;
-      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
-    });
-  }
-
-  document.querySelectorAll('.lens-btn').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      applyLens(btn.getAttribute('data-lens'));
-    });
-  });
-
-  applyLens('analyst');
-
-  var domainSelect = document.getElementById('domain-select');
-  var domainCountEl = document.getElementById('domain-count');
-  var allProjectEls = document.querySelectorAll('.project[data-domain]');
-
-  function applyDomainFilter(domain) {
-    var shown = 0;
-    allProjectEls.forEach(function (el) {
-      var domains = (el.getAttribute('data-domain') || '').split(' ');
-      var match = domain === 'all' || domains.indexOf(domain) !== -1;
-      el.classList.toggle('domain-hidden', !match);
-      if (match) shown++;
-    });
-    if (domainCountEl) domainCountEl.textContent = shown + ' of ' + allProjectEls.length + ' shown';
-  }
-
-  if (domainSelect) {
-    domainSelect.addEventListener('change', function () {
-      applyDomainFilter(domainSelect.value);
-    });
-    applyDomainFilter(domainSelect.value);
-  }
-})();
-</script>
+</main>
+<footer>
+  <span>Dinesh Navaneethan · Birmingham, UK</span>
+  <span>Updated November 2026</span>
+</footer>
+</body>
+</html>
