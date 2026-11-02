@@ -554,7 +554,7 @@
   <section id="projects">
     <div class="section-head">
       <h2>Projects &amp; Case Studies</h2>
-      <span class="count" id="project-count">9 total</span>
+      <span class="count" id="project-count">10 total</span>
     </div>
     <p class="lede" style="margin-bottom: 18px;">
       Viewing as <strong id="lens-label">Data Analyst</strong> — the lens above changes which
@@ -570,7 +570,7 @@
         <option value="analytics">Data &amp; Analytics</option>
         <option value="strategy">Business &amp; Strategy</option>
       </select>
-      <span class="domain-count" id="domain-count">9 of 9 shown</span>
+      <span class="domain-count" id="domain-count">10 of 10 shown</span>
     </div>
 
     <div class="project-grid">
@@ -719,15 +719,17 @@
           <span class="status-live"><span class="dot"></span>live</span>
         </div>
         <p class="desc">
-          End-to-end pipeline (Airflow, dbt, Delta Lake, Azure) building a Gold-layer
-          analytics schema from 50,000+ relational data points, feeding multi-page Power BI
-          dashboards and a natural-language-to-SQL interface for non-technical stakeholders.
+          End-to-end Bronze/Silver/Gold pipeline orchestrated with Airflow in Docker, with
+          Delta Lake MERGE upserts and dbt models on DuckDB feeding Power BI dashboards and a
+          natural-language-to-SQL interface. Found and fixed a duplicate-snapshot bug that had
+          made most weekly return figures wrong, and added idempotent run-date loads.
           The live demo below is a freely-hostable companion running the same staging → marts
           SQL pattern and NL-to-SQL query box on live market data.
         </p>
         <div class="metric-row">
-          <div class="metric"><span class="num mono">-35%</span><span class="label">reporting turnaround</span></div>
-          <div class="metric"><span class="num mono">50k+</span><span class="label">data points modeled</span></div>
+          <div class="metric"><span class="num mono">75%</span><span class="label">duplicate rows found and removed</span></div>
+          <div class="metric"><span class="num mono">10</span><span class="label">automated dbt data tests</span></div>
+          <div class="metric"><span class="num mono">~80s</span><span class="label">full Airflow run, 5 tasks</span></div>
         </div>
         <div class="project-links">
           <a class="primary" href="https://stock-nl-sql-demo-dwy26ueqy4gb3ybcbdohuk.streamlit.app/" target="_blank" rel="noopener">
@@ -737,6 +739,35 @@
           <a href="https://github.com/Dinesh-0707/stock-data-pipeline" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
             Full pipeline code
+          </a>
+        </div>
+      </div>
+
+      <div class="project" id="proj-energy" data-domain="engineering analytics">
+        <div class="project-head">
+          <h3>UK Energy Price &amp; Carbon Tracker</h3>
+          <span class="project-tag">Data Pipeline</span>
+        </div>
+        <p class="desc">
+          Python pipeline collecting a year of half-hourly Octopus Agile electricity prices and
+          National Grid carbon intensity for London from two public APIs into PostgreSQL
+          (Docker), with retries and idempotent upserts. SQL analysis shows that charging an EV
+          in each day's cheapest hours instead of at 6pm costs 64% less and avoids 273 kg of
+          CO2 a year; a completeness check found and fixed a gap caused by an API quirk.
+        </p>
+        <div class="metric-row">
+          <div class="metric"><span class="num mono">&pound;843</span><span class="label">a year saved by smart EV charging</span></div>
+          <div class="metric"><span class="num mono">17,568</span><span class="label">half-hourly periods, 100% complete</span></div>
+          <div class="metric"><span class="num mono">53%</span><span class="label">cheaper overnight than the 4&ndash;7pm peak</span></div>
+        </div>
+        <div class="project-links">
+          <a class="primary" href="https://github.com/Dinesh-0707/energy_tracker#readme" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
+            Findings &amp; dashboard
+          </a>
+          <a href="https://github.com/Dinesh-0707/energy_tracker" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+            View code
           </a>
         </div>
       </div>
@@ -974,12 +1005,13 @@
         'proj-voice': { order: 0, featured: true },
         'proj-house-price': { order: 1, featured: true },
         'proj-crime': { order: 2, featured: true },
-        'proj-stock-pipeline': { order: 3, featured: false },
-        'proj-intake': { order: 4, featured: false },
-        'proj-ring': { order: 5, featured: false },
-        'proj-ba': { order: 6, featured: false },
-        'proj-quantium': { order: 7, featured: false },
-        'proj-pm': { order: 8, featured: false }
+        'proj-energy': { order: 3, featured: false },
+        'proj-stock-pipeline': { order: 4, featured: false },
+        'proj-intake': { order: 5, featured: false },
+        'proj-ring': { order: 6, featured: false },
+        'proj-ba': { order: 7, featured: false },
+        'proj-quantium': { order: 8, featured: false },
+        'proj-pm': { order: 9, featured: false }
       },
       skills: { 'skill-analytics': 0, 'skill-ai': 1, 'skill-strategy': 2, 'skill-delivery': 3, 'skill-engineering': 4 }
     },
@@ -990,14 +1022,15 @@
       label: 'Data Engineer',
       projects: {
         'proj-stock-pipeline': { order: 0, featured: true },
-        'proj-voice': { order: 1, featured: true },
-        'proj-house-price': { order: 2, featured: true },
-        'proj-crime': { order: 3, featured: false },
-        'proj-intake': { order: 4, featured: false },
-        'proj-ring': { order: 5, featured: false },
-        'proj-pm': { order: 6, featured: false },
-        'proj-ba': { order: 7, featured: false },
-        'proj-quantium': { order: 8, featured: false }
+        'proj-energy': { order: 1, featured: true },
+        'proj-voice': { order: 2, featured: true },
+        'proj-house-price': { order: 3, featured: true },
+        'proj-crime': { order: 4, featured: false },
+        'proj-intake': { order: 5, featured: false },
+        'proj-ring': { order: 6, featured: false },
+        'proj-pm': { order: 7, featured: false },
+        'proj-ba': { order: 8, featured: false },
+        'proj-quantium': { order: 9, featured: false }
       },
       skills: { 'skill-engineering': 0, 'skill-analytics': 1, 'skill-ai': 2, 'skill-delivery': 3, 'skill-strategy': 4 }
     },
@@ -1011,11 +1044,12 @@
         'proj-intake': { order: 1, featured: true },
         'proj-ring': { order: 2, featured: true },
         'proj-stock-pipeline': { order: 3, featured: true },
-        'proj-house-price': { order: 4, featured: false },
-        'proj-crime': { order: 5, featured: false },
-        'proj-voice': { order: 6, featured: false },
-        'proj-ba': { order: 7, featured: false },
-        'proj-quantium': { order: 8, featured: false }
+        'proj-energy': { order: 4, featured: false },
+        'proj-house-price': { order: 5, featured: false },
+        'proj-crime': { order: 6, featured: false },
+        'proj-voice': { order: 7, featured: false },
+        'proj-ba': { order: 8, featured: false },
+        'proj-quantium': { order: 9, featured: false }
       },
       skills: { 'skill-strategy': 0, 'skill-delivery': 1, 'skill-analytics': 2, 'skill-ai': 3, 'skill-engineering': 4 }
     },
@@ -1030,10 +1064,11 @@
         'proj-ring': { order: 2, featured: true },
         'proj-crime': { order: 3, featured: true },
         'proj-house-price': { order: 4, featured: false },
-        'proj-stock-pipeline': { order: 5, featured: false },
-        'proj-voice': { order: 6, featured: false },
-        'proj-ba': { order: 7, featured: false },
-        'proj-quantium': { order: 8, featured: false }
+        'proj-energy': { order: 5, featured: false },
+        'proj-stock-pipeline': { order: 6, featured: false },
+        'proj-voice': { order: 7, featured: false },
+        'proj-ba': { order: 8, featured: false },
+        'proj-quantium': { order: 9, featured: false }
       },
       skills: { 'skill-delivery': 0, 'skill-analytics': 1, 'skill-ai': 2, 'skill-strategy': 3, 'skill-engineering': 4 }
     }
