@@ -4,7 +4,7 @@ export default function Hero() {
   return (
     <section className="hero">
       <div className="hero-text">
-        <Reveal as="p" className="kicker">Data &amp; AI · Birmingham, UK</Reveal>
+        <Reveal as="p" className="kicker">Data &amp; AI Professional</Reveal>
         <Reveal as="h1" delay={0.05}>Dinesh Navaneethan <span className="creds">BCA, MSc</span></Reveal>
         <Reveal as="p" className="intro" delay={0.1}>
           Data and AI graduate with an MSc in Artificial Intelligence with Business Strategy from

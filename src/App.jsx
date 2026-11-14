@@ -64,10 +64,6 @@ export default function App() {
           <Contact />
         </main>
       )}
-      <footer>
-        <span>Dinesh Navaneethan · Birmingham, UK</span>
-        <span>Updated November 2026</span>
-      </footer>
     </>
   );
 }
